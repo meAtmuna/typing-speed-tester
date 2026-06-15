@@ -1,5 +1,6 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import paragraphs from "./data/paragraphs"
+
 function App() {
   const [currentText] = useState(() => {
     const randomPara = Math.floor(Math.random() * paragraphs.length)
@@ -7,7 +8,38 @@ function App() {
   })
 
   const [typedText, setTypedText] = useState("")
+  const [timeLeft, setTimeLeft] =  useState(60)
+  const [testStarted, setTestStarted] = useState(false)
+  const [testEnded, setTestEnded] = useState(false)
   const inputRef = useRef(null)
+
+  useEffect(()=> {
+    if (!testStarted || testEnded) return
+    
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer)
+          setTestEnded(true)
+          return 0
+        }
+
+        return prev - 1
+      })
+    }, 1000);
+
+    return () => clearInterval(timer)
+  }, [testStarted, testEnded])
+  
+  function updateTypedText(e) {
+    if (testEnded) return
+
+    if (!testStarted) {
+      setTestStarted(true)
+    }
+
+    setTypedText(e.target.value)
+  }
 
   return (
     <div 
@@ -18,7 +50,10 @@ function App() {
         <h1 className="text-4xl font-bold mb-10 text-center">
           Typing Speed Tester
         </h1>
-
+        
+        <div className="text-center mb-8 text-xl text-yellow-400">
+          Time: {timeLeft}s
+        </div>
         <div className="text-3xl leading-relaxed text-zinc-500">
           {currentText.split("").map((char, currentIndex) =>{
             let color = "text-zinc-500"
@@ -41,9 +76,10 @@ function App() {
           ref={inputRef}
           type="text" 
           value={typedText}
-          onChange={(e) => setTypedText(e.target.value)}
+          onChange={updateTypedText}
           className="opacity-0 absolute"
           autoFocus
+          disabled={testEnded}
         />
       </div>
     </div>
