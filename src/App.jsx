@@ -167,6 +167,24 @@ function App() {
           </button>
         </div>
 
+        {contentType === "words" && (
+          <div className="flex justify-center gap-3 mb-8">
+            {[10, 25, 50, 100].map((count) => (
+              <button 
+                className={`px-4 py-2 rounded ${
+                  wordCount === count 
+                  ? "bg-amber-400 text-black" 
+                  : "bg-zinc-800 text-white"
+                } `} 
+                key={count} 
+                onClick={() => setWordCount(count)}
+              >
+                {count}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="flex justify-center gap-8 mb-8 text-lg">
           <p className="text-yellow-400">
             Time: {timeLeft}s
