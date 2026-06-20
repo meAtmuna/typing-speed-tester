@@ -4,6 +4,7 @@ import words from "./data/words"
 import stories from "./data/stories"
 import Stats from "./components/Stats"
 import ResultModal from "./components/Result"
+import TypingArea from "./components/TypingArea"
 
 function App() {
   const [currentText, setCurrentText] = useState("")
@@ -170,23 +171,7 @@ function App() {
         
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
         
-        <div className="text-3xl leading-relaxed text-zinc-500">
-          {currentText.split("").map((char, currentIndex) =>{
-            let color = "text-zinc-500"
-
-            if (currentIndex < typedText.length) {
-              color = typedText[currentIndex] === char ? "text-white" : "text-red-500"
-            } else if (currentIndex === typedText.length) {
-              color =  "bg-yellow-500 text-black rounded"
-            }
-
-            return (
-              <span key={currentIndex} className={color}>
-                {char}
-              </span>
-            )
-          })}
-        </div>
+        <TypingArea currentText={currentText} typedText={typedText}/>
 
         <input
           ref={inputRef}
