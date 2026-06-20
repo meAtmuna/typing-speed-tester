@@ -5,6 +5,8 @@ import stories from "./data/stories"
 import Stats from "./components/Stats"
 import ResultModal from "./components/Result"
 import TypingArea from "./components/TypingArea"
+import ContentSelector from "./components/ContentSelector"
+import WordSelector from "./components/WordSelector"
 
 function App() {
   const [currentText, setCurrentText] = useState("")
@@ -130,43 +132,10 @@ function App() {
           Typing Speed Tester
         </h1>
         
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            className="px-4 py-2 rounded bg-zinc-800"
-            onClick={() => changeContentMode("words")}
-          >
-            Words
-          </button>
-          <button
-            className="px-4 py-2 rounded bg-zinc-800"
-            onClick={() => changeContentMode("paragraph")}
-          >
-            Paragraph
-          </button>
-          <button
-            className="px-4 py-2 rounded bg-zinc-800"
-            onClick={() => changeContentMode("story")}
-          >
-            Story
-          </button>
-        </div>
+        <ContentSelector contentType={contentType} changeContentMode={changeContentMode}/>
 
         {contentType === "words" && (
-          <div className="flex justify-center gap-3 mb-8">
-            {[10, 25, 50, 100].map((count) => (
-              <button 
-                className={`px-4 py-2 rounded ${
-                  wordCount === count 
-                  ? "bg-amber-400 text-black" 
-                  : "bg-zinc-800 text-white"
-                } `} 
-                key={count} 
-                onClick={() => setWordCount(count)}
-              >
-                {count}
-              </button>
-            ))}
-          </div>
+          <WordSelector  wordCount={wordCount} setWordCount={setWordCount}/>
         )}
         
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
