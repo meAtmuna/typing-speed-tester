@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import paragraphs from "./data/paragraphs"
 import words from "./data/words"
 import stories from "./data/stories"
+import Stats from "./components/Stats"
 
 function App() {
   const [currentText, setCurrentText] = useState("")
@@ -184,21 +185,9 @@ function App() {
             ))}
           </div>
         )}
-
-        <div className="flex justify-center gap-8 mb-8 text-lg">
-          <p className="text-yellow-400">
-            Time: {timeLeft}s
-          </p>
-          <p className="text-green-400">
-            WPM: {wpm}
-          </p>
-          <p className="text-red-500">
-            Mistakes: {mistakes}
-          </p>
-          <p className="text-blue-400">
-            Accuracy:  {accuracy}%
-          </p>
-        </div>
+        
+        <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
+        
         <div className="text-3xl leading-relaxed text-zinc-500">
           {currentText.split("").map((char, currentIndex) =>{
             let color = "text-zinc-500"
