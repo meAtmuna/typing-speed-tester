@@ -16,11 +16,12 @@ function App() {
   const [testEnded, setTestEnded] = useState(false)
   const [contentType, setContentType] = useState("words")
   const [wordCount, setWordCount] = useState(50)
+  const [customWords, setCustomWords] = useState("")
   const inputRef = useRef(null)
 
   useEffect(() =>{
     generateText()
-  }, [contentType,wordCount])
+  }, [contentType, wordCount])
 
   useEffect(()=> {
     if (!testStarted || testEnded) return
@@ -80,7 +81,19 @@ function App() {
     if (contentType === "words") {
       const randomWords = []
 
-      for (let i = 0; i < wordCount; i++) {
+      let totalWords = wordCount
+
+      if (wordCount === "custom") {
+        const customCount = Number(customWords)
+
+        if (customCount === 0) {
+          totalWords = 10000
+        } else {
+          totalWords = customCount
+        }
+      }
+
+      for (let i = 0; i < totalWords; i++) {
         const randomIndex = Math.floor(Math.random() * words.length)
         randomWords.push(words[randomIndex])  
       }
@@ -98,6 +111,12 @@ function App() {
 
     const randomIndex = Math.floor(Math.random() * stories.length)
     setCurrentText(stories[randomIndex])
+  }
+
+  function applyCustomWords() {
+    if (customWords.trim() === "") return
+
+    setWordCount("custom")
   }
 
   function resetTest() {
@@ -123,10 +142,7 @@ function App() {
   }
 
   return (
-    <div 
-      className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-6"
-      onClick={() => inputRef.current.focus()}
-    >
+    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-6">
       <div className="max-w-4xl w-full">
         <h1 className="text-4xl font-bold mb-10 text-center">
           Typing Speed Tester
@@ -135,12 +151,14 @@ function App() {
         <ContentSelector contentType={contentType} changeContentMode={changeContentMode}/>
 
         {contentType === "words" && (
-          <WordSelector  wordCount={wordCount} setWordCount={setWordCount}/>
+          <WordSelector  wordCount={wordCount} setWordCount={setWordCount} customWords={customWords} setCustomWords={setCustomWords} applyCustomWords={applyCustomWords}/>
         )}
         
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
         
-        <TypingArea currentText={currentText} typedText={typedText}/>
+        <div onClick={() => inputRef.current.focus()}>
+          <TypingArea currentText={currentText} typedText={typedText}/>
+        </div>
 
         <input
           ref={inputRef}
