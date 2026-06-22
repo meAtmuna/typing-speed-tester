@@ -42,7 +42,7 @@ function App() {
   }, [testStarted, testEnded])
 
   useEffect(() => {
-    if (typedText.length === currentText.length && typedText === currentText) {
+    if (currentText.length > 0 && typedText.length === currentText.length && typedText === currentText) {
       setTestEnded(true)
     }
   }, [typedText, currentText])
@@ -169,7 +169,21 @@ function App() {
         
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
         
-        <div onClick={() => inputRef.current.focus()}>
+        {!testStarted && (
+          <div className="flex justify-center mb-6">
+            <button
+              className="px-6 py-3 bg-amber-400 text-black font-semibold rounded-lg" 
+              onClick={() => {
+                setTestStarted(true)
+                inputRef.current?.focus()
+              }}
+            >
+              Start Typing
+            </button>
+          </div>
+        )}
+
+        <div>
           <TypingArea currentText={currentText} typedText={typedText}/>
         </div>
 

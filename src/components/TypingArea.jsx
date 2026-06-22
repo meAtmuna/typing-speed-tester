@@ -2,16 +2,26 @@ function TypingArea({currentText, typedText}) {
     return (
          <div className="text-3xl leading-relaxed text-zinc-500">
             {currentText.split("").map((char, currentIndex) =>{
-                let color = "text-zinc-500"
+                let styles = "text-zinc-500"
 
                 if (currentIndex < typedText.length) {
-                color = typedText[currentIndex] === char ? "text-white" : "text-red-500"
+                  const isCorrect = typedText[currentIndex] === char
+                   
+                  if (isCorrect) {
+                    styles = "text-white"
+                  } else {
+                    if (char === " ") {
+                        styles = "border-b-4 border-red-500"
+                    } else {
+                        styles = "text-red-500"
+                    }
+                  }
                 } else if (currentIndex === typedText.length) {
-                color =  "bg-yellow-500 text-black rounded"
+                  styles =  "bg-yellow-500 text-black rounded"
                 }
 
                 return (
-                <span key={currentIndex} className={color}>
+                <span key={currentIndex} className={styles}>
                     {char}
                 </span>
                 )
