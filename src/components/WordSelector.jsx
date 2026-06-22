@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-function WordSelector({ wordCount, setWordCount, customWords, setCustomWords, applyCustomWords}) {
+function WordSelector({ wordCount, changeWordCount, customWords, setCustomWords, applyCustomWords}) {
     const [showCustomInput, setShowCustomInput] = useState(false)
     const wordOptions = [10, 25, 50, 100]
     
@@ -15,7 +15,7 @@ function WordSelector({ wordCount, setWordCount, customWords, setCustomWords, ap
                 } `} 
                 key={count} 
                 onClick={() => {
-                  setWordCount(count)
+                  changeWordCount(count)
                   setShowCustomInput(false)
                 }}
                >

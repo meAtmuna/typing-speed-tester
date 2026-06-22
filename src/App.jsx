@@ -87,7 +87,7 @@ function App() {
         const customCount = Number(customWords)
 
         if (customCount === 0) {
-          totalWords = 10000
+          totalWords = 1000
         } else {
           totalWords = customCount
         }
@@ -116,7 +116,20 @@ function App() {
   function applyCustomWords() {
     if (customWords.trim() === "") return
 
+    const count = Number(customWords)
+
+    if (count > 1000) {
+      alert("Max 1000 words allowed")
+      return
+    }
+
     setWordCount("custom")
+    resetTest()
+  }
+
+  function changeWordCount(count) {
+    setWordCount(count)
+    resetTest()
   }
 
   function resetTest() {
@@ -151,7 +164,7 @@ function App() {
         <ContentSelector contentType={contentType} changeContentMode={changeContentMode}/>
 
         {contentType === "words" && (
-          <WordSelector  wordCount={wordCount} setWordCount={setWordCount} customWords={customWords} setCustomWords={setCustomWords} applyCustomWords={applyCustomWords}/>
+          <WordSelector  wordCount={wordCount} changeWordCount={changeWordCount} customWords={customWords} setCustomWords={setCustomWords} applyCustomWords={applyCustomWords}/>
         )}
         
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
@@ -165,7 +178,7 @@ function App() {
           type="text" 
           value={typedText}
           onChange={updateTypedText}
-          className="opacity-0 absolute"
+          className="opacity-0 pointer-events-none fixed"
           autoFocus
           disabled={testEnded}
         />
