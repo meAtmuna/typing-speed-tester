@@ -1,6 +1,6 @@
 function ResultModal({wpm, accuracy, mistakes, resetTest}) {
     return(
-        <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
+        <div className="min-h-screen bg-app-bg text-white flex items-center justify-center">
           <div className="bg-zinc-900 p-8 rounded-xl text-center">
             <h2 className="text-2xl font-bold mb-4 text-white">
               Your Stats

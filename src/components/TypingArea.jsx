@@ -1,23 +1,23 @@
 function TypingArea({currentText, typedText}) {
     return (
-         <div className="text-3xl leading-relaxed text-zinc-500">
+         <div className="bg-typing border border-border rounded-2xl p-8 text-3xl leading-relaxed">
             {currentText.split("").map((char, currentIndex) =>{
-                let styles = "text-zinc-500"
+                let styles = "text-untyped"
 
                 if (currentIndex < typedText.length) {
                   const isCorrect = typedText[currentIndex] === char
                    
                   if (isCorrect) {
-                    styles = "text-white"
+                    styles = "text-correct"
                   } else {
                     if (char === " ") {
                         styles = "border-b-4 border-red-500"
                     } else {
-                        styles = "text-red-500"
+                        styles = "text-mistake"
                     }
                   }
                 } else if (currentIndex === typedText.length) {
-                  styles =  "bg-yellow-500 text-black rounded"
+                  styles =  "bg-cyan text-app-bg rounded"
                 }
 
                 return (

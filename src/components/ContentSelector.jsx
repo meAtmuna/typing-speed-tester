@@ -1,36 +1,25 @@
 function ContentSelector({contentType, changeContentMode}) {
+    const tabs = ["words", "paragraph", "story"]
+
     return(
-        <div className="flex justify-center gap-4 mb-8">
-            <button
-                className={`px-4 py-2 rounded ${
-                    contentType === "words"
-                        ? "bg-yellow-500 text-black"
-                        : "bg-zinc-800 text-white"
-                }`}
-                onClick={() => changeContentMode("words")}
-            >
-                Words
-            </button>
-            <button
-                className={`px-4 py-2 rounded ${
-                    contentType === "paragraph"
-                        ? "bg-yellow-500 text-black"
-                        : "bg-zinc-800 text-white"
-                }`} 
-                onClick={() => changeContentMode("paragraph")}
-            >
-                Paragraph
-            </button>
-            <button
-                className={`px-4 py-2 rounded ${
-                    contentType === "story"
-                        ? "bg-yellow-500 text-black"
-                        : "bg-zinc-800 text-white" 
-                }`}
-                onClick={() => changeContentMode("story")}
-            >
-                Story
-            </button>
+        <div className="bg-card border border-border rounded-xl p-2.5 flex gap-4 mb-8 w-fit">
+            {tabs.map((tab) => {
+                const active = contentType === tab
+
+                return (
+                    <button 
+                        key={tab}
+                        className={`px-5 py-2 rounded-lg capitalize transition-all ${
+                            active
+                            ? "bg-cyan/10 text-cyan border border-cyan"
+                            : "text-secondary-text"
+                        }`}
+                        onClick={() => changeContentMode(tab)}
+                    >
+                        {tab}
+                    </button>
+                )
+            })}
         </div>
     )
 }

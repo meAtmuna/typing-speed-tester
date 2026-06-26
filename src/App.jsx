@@ -180,9 +180,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10">
-      <div className="max-w-4xl w-full">
-        <h1 className="text-4xl font-bold mb-10 text-center">
-          Typing Speed Tester
+      <div className="max-w-5xl w-full">
+        <h1 className="text-3xl font-bold mb-8">
+          Type<span className="text-cyan">Fast</span>
         </h1>
         
         <ContentSelector contentType={contentType} changeContentMode={changeContentMode}/>
@@ -227,7 +227,7 @@ function App() {
         {!testStarted && (
           <div className="flex justify-center mb-6">
             <button
-              className="px-6 py-3 bg-amber-400 text-black font-semibold rounded-lg" 
+              className="px-8 py-3 bg-cyan text-app-bg font-semibold rounded-xl" 
               onClick={() => {
                 setTestStarted(true)
                 inputRef.current?.focus()
