@@ -179,7 +179,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-6">
+    <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10">
       <div className="max-w-4xl w-full">
         <h1 className="text-4xl font-bold mb-10 text-center">
           Typing Speed Tester
