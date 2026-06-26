@@ -7,7 +7,10 @@ import ResultModal from "./components/Result"
 import TypingArea from "./components/TypingArea"
 import ContentSelector from "./components/ContentSelector"
 import WordSelector from "./components/WordSelector"
+import { generateStory } from "./utils/ai"
 
+// const apiKey = import.meta.env.VITE_GEMINI_API_KEY
+// console.log(apiKey);
 function App() {
   const [currentText, setCurrentText] = useState("")
   const [typedText, setTypedText] = useState("")
@@ -17,6 +20,7 @@ function App() {
   const [contentType, setContentType] = useState("words")
   const [wordCount, setWordCount] = useState(50)
   const [customWords, setCustomWords] = useState("")
+  const [loadingStory, setLoadingStory] = useState(false)
   const inputRef = useRef(null)
 
   useEffect(() =>{
@@ -42,7 +46,7 @@ function App() {
   }, [testStarted, testEnded])
 
   useEffect(() => {
-    if (currentText.length > 0 && typedText.length === currentText.length && typedText === currentText) {
+    if (currentText.length > 0 && typedText.length === currentText.length) {
       setTestEnded(true)
     }
   }, [typedText, currentText])
@@ -127,17 +131,37 @@ function App() {
     resetTest()
   }
 
+  async function handleStory(type) {
+    try {
+      setLoadingStory(true)
+
+      const story = await generateStory(type)
+      resetTest(false)
+      setCurrentText(story)
+
+    } catch (error) {
+      console.log(error)
+      alert("story generate failed")
+
+    } finally {
+      setLoadingStory(false)
+    }
+  }
+
   function changeWordCount(count) {
     setWordCount(count)
     resetTest()
   }
 
-  function resetTest() {
+  function resetTest(shouldGenerate = true) {
     setTypedText("")
     setTimeLeft(60)
     setTestStarted(false)
     setTestEnded(false)
-    generateText()
+
+    if (shouldGenerate) {
+      generateText()
+    }
   }
 
   function changeContentMode(mode) {
@@ -168,7 +192,38 @@ function App() {
         )}
         
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
+
+        {contentType === "story" && (
+          <div className="flex justify-center gap-3 mb-6">
+            <button 
+              className="px-4 py-2 bg-purple-500 rounded"
+              onClick={() => handleStory("horror")}
+            >
+              Horror
+            </button>
+
+            <button 
+              className="px-4 py-2 bg-green-500 rounded"
+              onClick={() => handleStory("funny")}
+            >
+              Funny
+            </button>
+
+            <button
+              className="px-4 py-2 bg-blue-500 rounded"
+              onClick={() => handleStory("adventure")}
+            >
+              Adventure
+            </button>
+          </div>
+        )}
         
+        {loadingStory && (
+          <p className="text-center mb-4 text-yellow-400">
+            Generating Story...
+          </p>
+        )}
+
         {!testStarted && (
           <div className="flex justify-center mb-6">
             <button
