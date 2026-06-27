@@ -7,6 +7,7 @@ import ResultModal from "./components/Result"
 import TypingArea from "./components/TypingArea"
 import ContentSelector from "./components/ContentSelector"
 import WordSelector from "./components/WordSelector"
+import StorySelector from "./components/storySelector"
 import { generateStory } from "./utils/ai"
 
 // const apiKey = import.meta.env.VITE_GEMINI_API_KEY
@@ -21,6 +22,7 @@ function App() {
   const [wordCount, setWordCount] = useState(50)
   const [customWords, setCustomWords] = useState("")
   const [loadingStory, setLoadingStory] = useState(false)
+  const [selectedStoryType, setSelectedStoryType] = useState()
   const inputRef = useRef(null)
 
   useEffect(() =>{
@@ -132,6 +134,8 @@ function App() {
   }
 
   async function handleStory(type) {
+    setSelectedStoryType(type)
+
     try {
       setLoadingStory(true)
 
@@ -185,38 +189,53 @@ function App() {
           Type<span className="text-cyan">Fast</span>
         </h1>
         
-        <ContentSelector contentType={contentType} changeContentMode={changeContentMode}/>
+        <div className="bg-card border border-border rounded-xl p-3 mb-8 flex justify-between items-center gap-6">
+          <ContentSelector 
+            contentType={contentType} 
+            changeContentMode={changeContentMode}
+          />
 
-        {contentType === "words" && (
-          <WordSelector  wordCount={wordCount} changeWordCount={changeWordCount} customWords={customWords} setCustomWords={setCustomWords} applyCustomWords={applyCustomWords}/>
-        )}
-        
+          {contentType === "words" && (
+            <WordSelector  
+              wordCount={wordCount} 
+              changeWordCount={changeWordCount} 
+              customWords={customWords} 
+              setCustomWords={setCustomWords} 
+              applyCustomWords={applyCustomWords}
+            />
+          )}    
+
+          {contentType === "story" && (
+            <StorySelector 
+              handleStory={handleStory}
+              selectedStoryType={selectedStoryType} 
+            />
+          )}
+        </div>
+          {/* // <div className="flex justify-center gap-3 mb-6">
+          //   <button 
+          //     className="px-4 py-2 bg-purple-500 rounded"
+          //     onClick={() => handleStory("horror")}
+          //   >
+          //     Horror
+          //   </button>
+
+          //   <button 
+          //     className="px-4 py-2 bg-green-500 rounded"
+          //     onClick={() => handleStory("funny")}
+          //   >
+          //     Funny
+          //   </button>
+
+          //   <button
+          //     className="px-4 py-2 bg-blue-500 rounded"
+          //     onClick={() => handleStory("adventure")}
+          //   >
+          //     Adventure
+          //   </button>
+          // </div> */}
+
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
-
-        {contentType === "story" && (
-          <div className="flex justify-center gap-3 mb-6">
-            <button 
-              className="px-4 py-2 bg-purple-500 rounded"
-              onClick={() => handleStory("horror")}
-            >
-              Horror
-            </button>
-
-            <button 
-              className="px-4 py-2 bg-green-500 rounded"
-              onClick={() => handleStory("funny")}
-            >
-              Funny
-            </button>
-
-            <button
-              className="px-4 py-2 bg-blue-500 rounded"
-              onClick={() => handleStory("adventure")}
-            >
-              Adventure
-            </button>
-          </div>
-        )}
         
         {loadingStory && (
           <p className="text-center mb-4 text-yellow-400">

@@ -2,7 +2,7 @@ function ContentSelector({contentType, changeContentMode}) {
     const tabs = ["words", "paragraph", "story"]
 
     return(
-        <div className="bg-card border border-border rounded-xl p-2.5 flex gap-4 mb-8 w-fit">
+        <div className="flex gap-4">
             {tabs.map((tab) => {
                 const active = contentType === tab
 
