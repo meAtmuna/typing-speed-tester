@@ -1,22 +1,18 @@
-import { useState } from "react"
-
-function WordSelector({ wordCount, changeWordCount, customWords, setCustomWords, applyCustomWords}) {
-    const [showCustomInput, setShowCustomInput] = useState(false)
+function WordSelector({ wordCount, changeWordCount, openCustomModal}) {
     const wordOptions = [10, 25, 50, 100]
     
     return (
         <div className="flex gap-3 items-center">
             {wordOptions.map((count) => (
               <button 
-                className={`px-4 py-2 rounded ${
+                className={`px-4 py-2 rounded-lg transition-all ${
                   wordCount === count 
-                  ? "bg-amber-400 text-black" 
-                  : "bg-zinc-800 text-white"
+                  ? "bg-cyan/15 text-cyan" 
+                  : "text-secondary-text hover:text-cyan hover:bg-cyan/10"
                 } `} 
                 key={count} 
                 onClick={() => {
                   changeWordCount(count)
-                  setShowCustomInput(false)
                 }}
                >
                 {count}
@@ -24,43 +20,15 @@ function WordSelector({ wordCount, changeWordCount, customWords, setCustomWords,
             ))}
 
             <button 
-              className="px-4 py-2 rounded bg-zinc-800 text-white"
-              onClick={() => setShowCustomInput(true)}
+              className={`px-4 py-2 rounded-lg transition-all ${
+                wordCount === "custom"
+                  ? "bg-cyan/15 text-cyan"
+                  : "text-secondary-text hover:text-cyan hover:bg-cyan/10" 
+              }`}
+              onClick={openCustomModal}
             >
               Custom
             </button>
-
-            {showCustomInput && (
-              <div className="flex items-center gap-3">
-                <input 
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="word amount"
-                  value={customWords}
-                  onChange={(e) => {
-                    const value = e.target.value
-
-                    if (/^\d*$/.test(value)) {
-                      setCustomWords(value)
-                    }
-                  }}
-                  className={`w-40 px-3 py-2 rounded outline-none border ${
-                    customWords.trim() === ""
-                      ? "border-red-500 bg-zinc-900" 
-                      : "border-zinc-700 bg-zinc-800" 
-                  } text-white`}
-                />
-
-                {customWords.trim() !== "" && (
-                  <button 
-                    className="px-4 py-2 rounded bg-amber-400 text-black"
-                    onClick={applyCustomWords}
-                  >
-                    Apply
-                  </button>
-                )}
-              </div>
-            )}
         </div>
     )
 }

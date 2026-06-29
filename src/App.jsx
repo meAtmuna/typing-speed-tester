@@ -22,7 +22,8 @@ function App() {
   const [wordCount, setWordCount] = useState(50)
   const [customWords, setCustomWords] = useState("")
   const [loadingStory, setLoadingStory] = useState(false)
-  const [selectedStoryType, setSelectedStoryType] = useState()
+  const [selectedStoryType, setSelectedStoryType] = useState("")
+  const [showCustomModal, setShowCustomModal] = useState(false)
   const inputRef = useRef(null)
 
   useEffect(() =>{
@@ -198,10 +199,8 @@ function App() {
           {contentType === "words" && (
             <WordSelector  
               wordCount={wordCount} 
-              changeWordCount={changeWordCount} 
-              customWords={customWords} 
-              setCustomWords={setCustomWords} 
-              applyCustomWords={applyCustomWords}
+              changeWordCount={changeWordCount}
+              openCustomModal={() => setShowCustomModal(true)}
             />
           )}    
 
@@ -212,28 +211,6 @@ function App() {
             />
           )}
         </div>
-          {/* // <div className="flex justify-center gap-3 mb-6">
-          //   <button 
-          //     className="px-4 py-2 bg-purple-500 rounded"
-          //     onClick={() => handleStory("horror")}
-          //   >
-          //     Horror
-          //   </button>
-
-          //   <button 
-          //     className="px-4 py-2 bg-green-500 rounded"
-          //     onClick={() => handleStory("funny")}
-          //   >
-          //     Funny
-          //   </button>
-
-          //   <button
-          //     className="px-4 py-2 bg-blue-500 rounded"
-          //     onClick={() => handleStory("adventure")}
-          //   >
-          //     Adventure
-          //   </button>
-          // </div> */}
 
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
         
@@ -271,6 +248,55 @@ function App() {
           disabled={testEnded}
         />
       </div>
+
+      {showCustomModal && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-card border border-border rounded-2xl p-6 w[420px]">
+            <h2 className="text-xl font-bold mb-2">Custom Word Count</h2>
+            <p className="text-secondary-text mb-4">
+              Enter number of words
+            </p>
+
+            <input 
+                type="text"
+                // inputMode="numeric"
+                placeholder="word amount"
+                value={customWords}
+                onChange={(e) => {
+                  const value = e.target.value
+
+                  if (/^\d*$/.test(value)) {
+                    setCustomWords(value)
+                  }
+                }}
+                className={`w-full px-4 py-3 rounded-lg outline-none border mb-4 ${
+                  customWords.trim() === ""
+                    ? "border-red-500 bg-typing-box" 
+                    : "border-border bg-typing-box focus:border-cyan" 
+                } text-primary-text`}
+              />
+
+              <div className="flex gap-3 justify-end"> 
+                <button 
+                  className="px-4 py-2 rounded-lg text-secondary-text border border-cyan"
+                  onClick={() => setShowCustomModal(false)}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="px-4 py-2 rounded-lg bg-cyan text-app-bg font-semibold"
+                  onClick={() => {
+                    applyCustomWords()
+                    setShowCustomModal(false)
+                  }}
+                >
+                  Apply
+                </button>
+              </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
