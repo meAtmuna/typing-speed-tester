@@ -25,6 +25,9 @@ function App() {
   const [selectedStoryType, setSelectedStoryType] = useState("")
   const [showCustomModal, setShowCustomModal] = useState(false)
   const inputRef = useRef(null)
+  
+  const keySound = useRef(new Audio("/keyPress.mp3"))
+  keySound.current.volume = 0.2
 
   useEffect(() =>{
     generateText()
@@ -63,11 +66,18 @@ function App() {
   function updateTypedText(e) {
     if (testEnded) return
 
+    const value = e.target.value
+
+    if (value.length > typedText.length) {
+      keySound.current.currentTime = 0
+      keySound.current.play().catch(() => {})
+    }
+
     if (!testStarted) {
       setTestStarted(true)
     }
 
-    setTypedText(e.target.value)
+    setTypedText(value)
   }
 
   const mistakes = typedText
@@ -186,7 +196,8 @@ function App() {
   return (
     <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10">
       <div className="max-w-5xl w-full">
-        <h1 className="text-3xl font-bold mb-8">
+        <h1 className="text-3xl font-bold mb-8 flex items-center gap-2.5">
+          <i class="fa-solid fa-keyboard text-cyan"></i>
           Type<span className="text-cyan">Fast</span>
         </h1>
         
