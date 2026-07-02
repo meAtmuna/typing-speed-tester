@@ -24,10 +24,14 @@ function App() {
   const [loadingStory, setLoadingStory] = useState(false)
   const [selectedStoryType, setSelectedStoryType] = useState("")
   const [showCustomModal, setShowCustomModal] = useState(false)
+  const [wpmHistory, setWpmHistory] = useState([])
   const inputRef = useRef(null)
+  const wpmRef = useRef(0)
   
   const keySound = useRef(new Audio("/keyPress.mp3"))
-  keySound.current.volume = 0.2
+  useEffect(() => {
+    keySound.current.volume = 0.2
+  }, [])
 
   useEffect(() =>{
     generateText()
@@ -37,6 +41,8 @@ function App() {
     if (!testStarted || testEnded) return
     
     const timer = setInterval(() => {
+      setWpmHistory((old) => [...old, wpmRef.current])
+
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer)
@@ -93,6 +99,10 @@ function App() {
   const timeSpent = (60 - timeLeft) / 60
 
   const wpm = timeSpent > 0 ? Math.round(correctChars / 5 / timeSpent) : 0
+
+  useEffect(() => {
+    wpmRef.current = wpm
+  }, [wpm])
 
   function generateText() {
     if (contentType === "words") {
@@ -173,6 +183,7 @@ function App() {
     setTimeLeft(60)
     setTestStarted(false)
     setTestEnded(false)
+    setWpmHistory([])
 
     if (shouldGenerate) {
       generateText()
@@ -189,7 +200,13 @@ function App() {
   
   if (testEnded) {
     return (
-      <ResultModal wpm={wpm} accuracy={accuracy} mistakes={mistakes} resetTest={resetTest}/>
+      <ResultModal 
+        wpm={wpm} 
+        accuracy={accuracy} 
+        mistakes={mistakes} 
+        resetTest={resetTest}
+        wpmHistory={wpmHistory}
+      />
     )
   }
 
@@ -197,7 +214,7 @@ function App() {
     <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10">
       <div className="max-w-5xl w-full">
         <h1 className="text-3xl font-bold mb-8 flex items-center gap-2.5">
-          <i class="fa-solid fa-keyboard text-cyan"></i>
+          <i className="fa-solid fa-keyboard text-cyan"></i>
           Type<span className="text-cyan">Fast</span>
         </h1>
         
