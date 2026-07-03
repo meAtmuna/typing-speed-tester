@@ -15,13 +15,13 @@ function ResultChart({wpmHistory}) {
         labels: wpmHistory.map((_, i) => i + 1),
         datasets: [
             {
-                label: "WPM",
                 data: wpmHistory,
                 borderColor: "#00d4ff",
                 backgroundColor: "rgba(0, 212, 255, 0.15)",
                 tension: 0.3,
                 fill: true, 
-                pointRadius: 4,
+                pointRadius: 3,
+                pointHoverRadius: 5,
                 borderWidth: 2
             }
         ]
@@ -29,26 +29,29 @@ function ResultChart({wpmHistory}) {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
-                labels: {
-                    color: "#f1f5f9"
-                }
+                display: false
             }
         },
         scales: {
             x: {
                 ticks: { color: "#94a3b8"},
-                grid: { color: "#1e293b"},
+                grid: { color: "#1e2a40"},
             },
             y: {
                 ticks: { color: "#94a3b8"},
-                grid: { color: "#1e293b"},
+                grid: { color: "#1e2a40"},
             }
         }
     }
 
-    return <Line data={data} options={options} />
+    return (
+        <div className="w-full h-64">
+            <Line data={data} options={options} />
+        </div>
+    )
 }
 
 export default ResultChart

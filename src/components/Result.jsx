@@ -1,40 +1,52 @@
 import ResultChart from "./ResultChart"
 
-function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory}) {
+function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLeft}) {
     return(
-        <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6">
-          <div className="bg-card border border-border p-8 rounded-2xl w-full max-w-3xl">
-            <h2 className="text-3xl font-bold mb-6 text-center">
-              Your Results
-            </h2>
+        <div className="h-screen bg-app-bg flex items-center justify-center px-6 py-4 overflow-hidden">
+          <div className="bg-card border border-border p-7 rounded-3xl w-full max-w-4xl">
 
-            <div className="grid grid-cols-3 gap-4 mb-8 text-center">
-              <div>
-                <p className="text-muted-text">WPM</p>
-                <p className="text-cyan text-3xl font-bold">{wpm}</p>
+            <div className="text-center mb-8">
+              <div className="inline-block px-4 py-1 rounded-full bg-cyan/10 text-cyan border border-cyan/20 text-sm mb-4">
+                test complete
               </div>
 
-              <div>
-                <p className="text-muted-text">Accuracy</p>
-                <p className="text-emerald-400 text-3xl font-bold">{accuracy}%</p>
+              <h1 className="text-6xl font-bold text-cyan mb-2">{wpm}</h1>
+
+              <p className="text-muted-text tracking-[0.2em] uppercase">Words Per Minute</p>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 mb-6">
+              <div className="bg-typing border border-border rounded-2xl p-5 text-center">
+                <p className="text-accuracy text-4xl font-bold">{accuracy}%</p>
+                <p className="text-muted-text uppercase text-sm mt-1">Accuracy</p>
               </div>
 
-              <div>
-                <p className="text-muted-text">Mistakes</p>
-                <p className="text-mistake text-3xl font-bold">{mistakes}</p>
+              <div className="bg-typing border border-border rounded-2xl p-5 text-center">
+                <p className="text-mistake text-4xl font-bold">{mistakes}</p>
+                <p className="text-muted-text uppercase text-sm mt-1">Mistakes</p>
+              </div>
+
+              <div className="bg-typing border border-border rounded-2xl p-5 text-center">
+                <p className="text-time text-4xl font-bold">{60 - timeLeft}s</p>
+                <p className="text-muted-text uppercase text-sm mt-1">Time</p>
               </div>
             </div>
 
-            <div className="mb-8">
+            <div className="mb-5 bg-typing border border-border rounded-2xl p-4">
+              <p className="text-muted-text uppercase text-sm mb-4">WPM Over Time</p>
               <ResultChart wpmHistory={wpmHistory} />
             </div>
             
-            <div className="text-center">
+            <div className="flex gap-4">
               <button
-                className="px-6 py-3 bg-cyan text-app-bg rounded-xl font-bold"
+                className="flex-1 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all"
                 onClick={resetTest}
               >
-                Restart 
+                Try Again
+              </button>
+
+              <button className="px-8 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all">
+                Share
               </button>
             </div>
           </div>

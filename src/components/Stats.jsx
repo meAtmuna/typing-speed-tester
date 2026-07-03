@@ -1,9 +1,9 @@
 function Stats({ timeLeft, wpm, mistakes, accuracy }) {
   const stats = [
-    { label: "TIME" , value: `${timeLeft}s` , color: "text-amber-400"},
-    { label: "WPM" , value: wpm , color: "text-emerald-400"},
-    { label: "ACCURACY" , value: `${accuracy}%` , color: "text-blue-400"},
-    { label: "MISTAKES" , value: mistakes , color: "text-red-400"},
+    { label: "TIME" , value: `${timeLeft}s` , color: "text-time"},
+    { label: "WPM" , value: wpm , color: "text-wpm"},
+    { label: "ACCURACY" , value: `${accuracy}%` , color: "text-accuracy"},
+    { label: "MISTAKES" , value: mistakes , color: "text-mistake"},
   ]
     return (
         <div className="grid md:grid-cols-4 gap-8 mb-8">

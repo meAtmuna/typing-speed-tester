@@ -206,6 +206,7 @@ function App() {
         mistakes={mistakes} 
         resetTest={resetTest}
         wpmHistory={wpmHistory}
+        timeLeft={timeLeft}
       />
     )
   }
