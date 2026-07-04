@@ -10,7 +10,7 @@ function Stats({ timeLeft, wpm, mistakes, accuracy }) {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-card border border-border rounded-xl py-4 mask-l-from-44 mask-r-from-44 text-center"
+              className="bg-card border border-border rounded-xl py-4 text-center"
             >
               <p className="text-xs tracking-widest text-muted-text mb-1">
                 {stat.label}

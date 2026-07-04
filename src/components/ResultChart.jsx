@@ -12,17 +12,17 @@ ChartJS.register(
 
 function ResultChart({wpmHistory}) {
     const data = {
-        labels: wpmHistory.map((_, i) => i + 1),
+        labels: wpmHistory.map((_, i) => `${i + 1}s`),
         datasets: [
             {
                 data: wpmHistory,
                 borderColor: "#00d4ff",
                 backgroundColor: "rgba(0, 212, 255, 0.15)",
-                tension: 0.3,
+                tension: 0.4,
                 fill: true, 
                 pointRadius: 3,
                 pointHoverRadius: 5,
-                borderWidth: 2
+                borderWidth: 3,
             }
         ]
     }
@@ -33,16 +33,47 @@ function ResultChart({wpmHistory}) {
         plugins: {
             legend: {
                 display: false
+            },
+            tooltip: {
+                backgroundColor: "#131825",
+                borderColor: "#00d4ff",
+                borderWidth: 1,
+                padding: 12,
+                displayColors: false,
+                cornerRadius: 10,
+                callbacks: {
+                    title: (items) => `Second: ${items[0].label}`,
+                    label: (context) => `WPM: ${context.raw}`
+                }
             }
         },
         scales: {
             x: {
-                ticks: { color: "#94a3b8"},
-                grid: { color: "#1e2a40"},
+                title: {
+                    display: true,
+                    text: "Time (seconds)",
+                    color: "#94a3b8"
+                },
+                ticks: { 
+                    color: "#94a3b8"
+                },
+                grid: { 
+                    color: "#1e2a40"
+                },
             },
             y: {
-                ticks: { color: "#94a3b8"},
-                grid: { color: "#1e2a40"},
+                title: {
+                    display: true,
+                    text: "Words Per Minute",
+                    color: "#94a3b8"
+                },
+                ticks: { 
+                    color: "#94a3b8"
+                },
+                grid: { 
+                    color: "#1e2a40"
+                },
+                beginAtZero: true
             }
         }
     }

@@ -1,13 +1,36 @@
 import ResultChart from "./ResultChart"
 
 function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLeft}) {
+    async function shareResult() {
+      const text = `My TypeFast Result
+        WPM: ${wpm}
+        Accuracy: ${accuracy}%
+        Mistakes: ${mistakes}
+      Practice on TypeFast!
+      `;
+
+      try{
+        if (navigator.share) {
+          await navigator.share({
+            title: "My TypeFast Result",
+            text,
+          });
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(text);
+          alert("Result copied to clipboard");
+        }
+      } catch (err) {
+        console.log(err);
+        alert("Unable to share result.")
+      }
+    }
     return(
         <div className="h-screen bg-app-bg flex items-center justify-center px-6 py-4 overflow-hidden">
           <div className="bg-card border border-border p-7 rounded-3xl w-full max-w-4xl">
 
             <div className="text-center mb-8">
               <div className="inline-block px-4 py-1 rounded-full bg-cyan/10 text-cyan border border-cyan/20 text-sm mb-4">
-                test complete
+                Test Complete
               </div>
 
               <h1 className="text-6xl font-bold text-cyan mb-2">{wpm}</h1>
@@ -39,13 +62,16 @@ function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLeft})
             
             <div className="flex gap-4">
               <button
-                className="flex-1 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all"
+                className="flex-1 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10"
                 onClick={resetTest}
               >
                 Try Again
               </button>
 
-              <button className="px-8 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all">
+              <button
+                className="px-8 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10"
+                onClick={shareResult}
+              >
                 Share
               </button>
             </div>
