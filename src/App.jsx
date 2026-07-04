@@ -7,7 +7,7 @@ import ResultModal from "./components/Result"
 import TypingArea from "./components/TypingArea"
 import ContentSelector from "./components/ContentSelector"
 import WordSelector from "./components/WordSelector"
-import StorySelector from "./components/storySelector"
+import StorySelector from "./components/StorySelector"
 import { generateStory } from "./utils/ai"
 
 // const apiKey = import.meta.env.VITE_GEMINI_API_KEY
