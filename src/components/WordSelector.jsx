@@ -5,7 +5,7 @@ function WordSelector({ wordCount, changeWordCount, openCustomModal}) {
         <div className="flex gap-3 items-center">
             {wordOptions.map((count) => (
               <button 
-                className={`px-4 py-2 rounded-lg transition-all ${
+                className={`px-4 py-2 rounded-lg transition-all cursor-pointer ${
                   wordCount === count 
                   ? "bg-cyan/15 text-cyan" 
                   : "text-secondary-text hover:text-cyan hover:bg-cyan/10"
@@ -20,7 +20,7 @@ function WordSelector({ wordCount, changeWordCount, openCustomModal}) {
             ))}
 
             <button 
-              className={`px-4 py-2 rounded-lg transition-all ${
+              className={`px-4 py-2 rounded-lg transition-all cursor-pointer ${
                 wordCount === "custom"
                   ? "bg-cyan/15 text-cyan"
                   : "text-secondary-text hover:text-cyan hover:bg-cyan/10" 

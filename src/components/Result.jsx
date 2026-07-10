@@ -1,4 +1,5 @@
 import ResultChart from "./ResultChart"
+import { Activity } from 'lucide-react'
 
 function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLeft}) {
     async function shareResult() {
@@ -29,8 +30,9 @@ function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLeft})
           <div className="bg-card border border-border p-7 rounded-3xl w-full max-w-4xl">
 
             <div className="text-center mb-8">
-              <div className="inline-block px-4 py-1 rounded-full bg-cyan/10 text-cyan border border-cyan/20 text-sm mb-4">
-                Test Complete
+              <div className="inline-flex items-center gap-0.5 px-4 py-1 rounded-full bg-cyan/10 text-cyan border border-cyan/20 text-sm mb-4">
+                <Activity size={14} />
+                <span>Test Complete</span>
               </div>
 
               <h1 className="text-6xl font-bold text-cyan mb-2">{wpm}</h1>
@@ -62,14 +64,14 @@ function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLeft})
             
             <div className="flex gap-4">
               <button
-                className="flex-1 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10"
+                className="flex-1 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10 cursor-pointer"
                 onClick={resetTest}
               >
                 Try Again
               </button>
 
               <button
-                className="px-8 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10"
+                className="px-8 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10 cursor-pointer"
                 onClick={shareResult}
               >
                 Share

@@ -8,6 +8,7 @@ import TypingArea from "./components/TypingArea"
 import ContentSelector from "./components/ContentSelector"
 import WordSelector from "./components/WordSelector"
 import StorySelector from "./components/StorySelector"
+import ParagraphSelector from "./components/ParagraphSelector"
 import { generateStory } from "./utils/ai"
 
 // const apiKey = import.meta.env.VITE_GEMINI_API_KEY
@@ -22,9 +23,10 @@ function App() {
   const [wordCount, setWordCount] = useState(50)
   const [customWords, setCustomWords] = useState("")
   const [loadingStory, setLoadingStory] = useState(false)
-  const [selectedStoryType, setSelectedStoryType] = useState("")
+  const [selectedStoryType, setSelectedStoryType] = useState("horror")
   const [showCustomModal, setShowCustomModal] = useState(false)
   const [wpmHistory, setWpmHistory] = useState([])
+  const [paragraphDifficulty, setParagraphDifficulty] = useState("easy")
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -131,8 +133,10 @@ function App() {
     }
 
     if (contentType === "paragraph") {
-      const randomIndex = Math.floor(Math.random() * paragraphs.length)
-      setCurrentText(paragraphs[randomIndex])
+      const selectedParagraphs = paragraphs[paragraphDifficulty]
+
+      const randomIndex = Math.floor(Math.random() * selectedParagraphs.length)
+      setCurrentText(selectedParagraphs[randomIndex])
       return
     }
 
@@ -171,6 +175,11 @@ function App() {
     } finally {
       setLoadingStory(false)
     }
+  }
+
+  function changeParagraphDifficulty(level) {
+    setParagraphDifficulty(level)
+    resetTest()
   }
 
   function changeWordCount(count) {
@@ -237,6 +246,13 @@ function App() {
             <StorySelector 
               handleStory={handleStory}
               selectedStoryType={selectedStoryType} 
+            />
+          )}
+
+          {contentType === "paragraph" && (
+            <ParagraphSelector
+              paragraphDifficulty={paragraphDifficulty}
+              changeParagraphDifficulty={changeParagraphDifficulty}
             />
           )}
         </div>

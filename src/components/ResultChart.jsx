@@ -79,7 +79,7 @@ function ResultChart({wpmHistory}) {
     }
 
     return (
-        <div className="w-full h-64">
+        <div className="w-full h-64 cursor-pointer">
             <Line data={data} options={options} />
         </div>
     )

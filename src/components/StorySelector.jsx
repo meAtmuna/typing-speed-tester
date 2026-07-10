@@ -9,7 +9,7 @@ function StorySelector({handleStory, selectedStoryType}) {
                 return (    
                     <button
                         key={type}
-                        className={`px-4 py-2 rounded-lg transition-all ${
+                        className={`px-4 py-2 rounded-lg transition-all cursor-pointer capitalize ${
                             active
                                 ? "bg-cyan/15 text-cyan"
                                 : "text-secondary-text hover:text-cyan hover:bg-cyan/10"

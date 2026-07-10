@@ -1,6 +1,6 @@
 function TypingArea({currentText, typedText}) {
     return (
-         <div className="bg-typing border border-border rounded-2xl p-8 text-3xl leading-relaxed">
+         <div className="bg-typing border border-border rounded-2xl p-8 text-3xl leading-relaxed cursor-text">
             {currentText.split("").map((char, currentIndex) =>{
                 let styles = "text-untyped"
 

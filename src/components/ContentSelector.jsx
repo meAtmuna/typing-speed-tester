@@ -9,7 +9,7 @@ function ContentSelector({contentType, changeContentMode}) {
                 return (
                     <button 
                         key={tab}
-                        className={`px-5 py-2 rounded-lg capitalize transition-all ${
+                        className={`px-5 py-2 rounded-lg capitalize transition-all cursor-pointer ${
                             active
                             ? "bg-cyan/10 text-cyan border border-cyan"
                             : "text-secondary-text"
