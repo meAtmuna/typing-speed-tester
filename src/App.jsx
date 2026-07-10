@@ -323,14 +323,14 @@ function App() {
 
               <div className="flex gap-3 justify-end"> 
                 <button 
-                  className="px-4 py-2 rounded-lg text-secondary-text border border-cyan"
+                  className="px-4 py-2 rounded-lg text-secondary-text border border-cyan cursor-pointer"
                   onClick={() => setShowCustomModal(false)}
                 >
                   Cancel
                 </button>
 
                 <button
-                  className="px-4 py-2 rounded-lg bg-cyan text-app-bg font-semibold"
+                  className="px-4 py-2 rounded-lg bg-cyan text-app-bg font-semibold cursor-pointer"
                   onClick={() => {
                     applyCustomWords()
                     setShowCustomModal(false)
