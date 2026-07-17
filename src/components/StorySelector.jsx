@@ -20,6 +20,18 @@ function StorySelector({handleStory, selectedStoryType}) {
                     </button>
                 )                
             })}
+
+            <button 
+                className={`px-4 py-2 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedStoryType === "ai"
+                    ? "bg-cyan/15 text-cyan"
+                    : "text-secondary-text hover:text-cyan hover:bg-cyan/10"
+                }`}
+                onClick={()=> handleStory("ai")}
+            >
+                <i className="fa-solid fa-wand-magic-sparkles text-xs" />
+                AI
+            </button>
         </div>
     )
 }

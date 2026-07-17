@@ -27,6 +27,8 @@ function App() {
   const [showCustomModal, setShowCustomModal] = useState(false)
   const [wpmHistory, setWpmHistory] = useState([])
   const [paragraphDifficulty, setParagraphDifficulty] = useState("easy")
+  const [selectedAiStoryType , setSelectedAiStoryType] = useState("horror")
+  const [showAiModal, setShowAiModal] = useState(false)
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -37,7 +39,7 @@ function App() {
 
   useEffect(() =>{
     generateText()
-  }, [contentType, wordCount])
+  }, [contentType, wordCount, paragraphDifficulty, selectedStoryType,])
 
   useEffect(()=> {
     if (!testStarted || testEnded) return
@@ -140,8 +142,9 @@ function App() {
       return
     }
 
-    const randomIndex = Math.floor(Math.random() * stories.length)
-    setCurrentText(stories[randomIndex])
+    const selectedStories = stories[selectedStoryType]
+    const randomIndex = Math.floor(Math.random() * selectedStories.length)
+    setCurrentText(selectedStories[randomIndex])
   }
 
   function applyCustomWords() {
@@ -159,18 +162,39 @@ function App() {
   }
 
   async function handleStory(type) {
-    setSelectedStoryType(type)
+    if (type !== "ai") {
+      setSelectedStoryType(type)
 
+      const selectedStories = stories[type]
+      const randomIndex = Math.floor(Math.random() * selectedStories.length)
+      resetTest(false)
+      setCurrentText(selectedStories[randomIndex])
+
+      return
+    }
+
+    setShowAiModal(true)
+  }
+
+  async function generateAiStory() {
     try {
       setLoadingStory(true)
+  
+      const story = await generateStory(selectedAiStoryType)
 
-      const story = await generateStory(type)
       resetTest(false)
       setCurrentText(story)
+      setShowAiModal(false)
 
-    } catch (error) {
-      console.log(error)
-      alert("story generate failed")
+    } catch {
+      const selectedStories = stories[selectedAiStoryType]
+      const randomIndex = Math.floor(Math.random() * selectedStories.length)
+
+      resetTest(false)
+      setCurrentText(selectedStories[randomIndex])
+
+      alert("AI unavailable. Showing local story.")
+      setShowAiModal(false)
 
     } finally {
       setLoadingStory(false)
@@ -259,11 +283,11 @@ function App() {
 
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
         
-        {loadingStory && (
+        {/* {loadingStory && (
           <p className="text-center mb-4 text-yellow-400">
             Generating Story...
           </p>
-        )}
+        )} */}
 
         {!testStarted && (
           <div className="flex justify-center mb-6">
@@ -340,6 +364,43 @@ function App() {
                 </button>
               </div>
           </div>
+        </div>
+      )}
+
+      {showAiModal && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-card border border-border rounded-2xl p-6 w[420px]">
+            <h2 className="text-xl font-bold mb-2">AI Story</h2>
+            <p className="text-secondary-text mb-5">
+              Select a Story type
+            </p>
+
+            <div className="grid grid-cols-3 gap-3 mb-6">
+              {["horror", "funny", "adventure"].map((type) => (
+                <button 
+                  key={type}
+                  onClick={() => setSelectedAiStoryType(type)}
+                  className={`py-2  rounded-lg capitalize border transition-all ${
+                    selectedAiStoryType === type
+                      ? "bg-cyan text-app-bg border-cyan"
+                      : "border-border text-secondary-text hover:border-cyan"
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex justify-end gap-3">
+              <button
+                className="px-5 rounded-lg bg-cyan text-app-bg font-semibold disabled:opacity-50"
+                onClick={generateAiStory}
+                disabled={loadingStory}
+              >
+                {loadingStory ? "Generating..." : "Generate"}
+              </button>
+            </div>
+          </div>  
         </div>
       )}
     </div>
