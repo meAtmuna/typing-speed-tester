@@ -1,4 +1,4 @@
-import { use, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import paragraphs from "./data/paragraphs"
 import words from "./data/words"
 import stories from "./data/stories"
@@ -11,8 +11,6 @@ import StorySelector from "./components/StorySelector"
 import ParagraphSelector from "./components/ParagraphSelector"
 import { generateStory } from "./utils/ai"
 
-// const apiKey = import.meta.env.VITE_GEMINI_API_KEY
-// console.log(apiKey);
 function App() {
   const [currentText, setCurrentText] = useState("")
   const [typedText, setTypedText] = useState("")
@@ -29,7 +27,6 @@ function App() {
   const [paragraphDifficulty, setParagraphDifficulty] = useState("easy")
   const [selectedAiStoryType , setSelectedAiStoryType] = useState("horror")
   const [showAiModal, setShowAiModal] = useState(false)
-  // const [isAiSelected, setIsAiSelected] = useState(false)
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -148,13 +145,11 @@ function App() {
         return
       }
     }
-    
+
     const selectedStories = stories[selectedStoryType]
     if (!selectedStories) return
     const randomIndex = Math.floor(Math.random() * selectedStories.length)
     setCurrentText(selectedStories[randomIndex])
-
-    return
   }
 
   function applyCustomWords() {
@@ -173,7 +168,6 @@ function App() {
 
   async function handleStory(type) {
     if (type !== "ai") {
-      // setIsAiSelected(false)
       setSelectedStoryType(type)
 
       const selectedStories = stories[type]
@@ -183,7 +177,7 @@ function App() {
 
       return
     }
-    // setIsAiSelected(true)
+
     setSelectedStoryType("ai")
     setShowAiModal(true)
   }
@@ -284,7 +278,6 @@ function App() {
             <StorySelector 
               handleStory={handleStory}
               selectedStoryType={selectedStoryType}
-              // isAiSelected={isAiSelected} 
             />
           )}
 
@@ -297,12 +290,6 @@ function App() {
         </div>
 
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
-        
-        {/* {loadingStory && (
-          <p className="text-center mb-4 text-yellow-400">
-            Generating Story...
-          </p>
-        )} */}
 
         {!testStarted && (
           <div className="flex justify-center mb-6">
@@ -343,7 +330,6 @@ function App() {
 
             <input 
                 type="text"
-                // inputMode="numeric"
                 placeholder="word amount"
                 value={customWords}
                 onChange={(e) => {
@@ -409,10 +395,7 @@ function App() {
             <div className="flex justify-end gap-3">
               <button 
                 className="px-4 py-2 rounded-lg text-secondary-text border border-cyan cursor-pointer"
-                onClick={() => {setShowAiModal(false)
-                  //  setIsAiSelected(false)
-                  // setSelectedStoryType("horror")
-                  }}
+                onClick={() => setShowAiModal(false)}
               >
                 Cancel
               </button>

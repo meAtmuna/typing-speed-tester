@@ -55,7 +55,6 @@ Then start the dev server:
 This project still being worked on. Some feature I plan to add:
 * Custom timer let the user pick 30, 60 or 120 seconds instead of always 60
 * Personal best tracking and leaderboard
-* Story mode update
 * Option to turn the keyboard sound on/off like Settings Option 
 * Responsive design
 * User authentication (login / signup)
