@@ -1,4 +1,4 @@
-function StorySelector({handleStory, selectedStoryType}) {
+function StorySelector({handleStory, selectedStoryType, isAiSelected}) {
     const storyTypes = ["horror" , "funny", "adventure"]
 
     return (

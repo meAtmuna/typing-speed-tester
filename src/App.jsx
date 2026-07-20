@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { use, useEffect, useRef, useState } from "react"
 import paragraphs from "./data/paragraphs"
 import words from "./data/words"
 import stories from "./data/stories"
@@ -29,6 +29,7 @@ function App() {
   const [paragraphDifficulty, setParagraphDifficulty] = useState("easy")
   const [selectedAiStoryType , setSelectedAiStoryType] = useState("horror")
   const [showAiModal, setShowAiModal] = useState(false)
+  // const [isAiSelected, setIsAiSelected] = useState(false)
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -142,9 +143,18 @@ function App() {
       return
     }
 
+    if (contentType === "story") {
+      if (selectedStoryType === "ai") {
+        return
+      }
+    }
+    
     const selectedStories = stories[selectedStoryType]
+    if (!selectedStories) return
     const randomIndex = Math.floor(Math.random() * selectedStories.length)
     setCurrentText(selectedStories[randomIndex])
+
+    return
   }
 
   function applyCustomWords() {
@@ -163,6 +173,7 @@ function App() {
 
   async function handleStory(type) {
     if (type !== "ai") {
+      // setIsAiSelected(false)
       setSelectedStoryType(type)
 
       const selectedStories = stories[type]
@@ -172,7 +183,8 @@ function App() {
 
       return
     }
-
+    // setIsAiSelected(true)
+    setSelectedStoryType("ai")
     setShowAiModal(true)
   }
 
@@ -182,6 +194,7 @@ function App() {
   
       const story = await generateStory(selectedAiStoryType)
 
+      setSelectedStoryType("ai")
       resetTest(false)
       setCurrentText(story)
       setShowAiModal(false)
@@ -190,6 +203,7 @@ function App() {
       const selectedStories = stories[selectedAiStoryType]
       const randomIndex = Math.floor(Math.random() * selectedStories.length)
 
+      setSelectedStoryType("ai")
       resetTest(false)
       setCurrentText(selectedStories[randomIndex])
 
@@ -269,7 +283,8 @@ function App() {
           {contentType === "story" && (
             <StorySelector 
               handleStory={handleStory}
-              selectedStoryType={selectedStoryType} 
+              selectedStoryType={selectedStoryType}
+              // isAiSelected={isAiSelected} 
             />
           )}
 
@@ -380,10 +395,10 @@ function App() {
                 <button 
                   key={type}
                   onClick={() => setSelectedAiStoryType(type)}
-                  className={`py-2  rounded-lg capitalize border transition-all ${
+                  className={`py-2  rounded-lg capitalize border transition-all px-4 cursor-pointer ${
                     selectedAiStoryType === type
-                      ? "bg-cyan text-app-bg border-cyan"
-                      : "border-border text-secondary-text hover:border-cyan"
+                      ? "bg-cyan/15 text-cyan"
+                      : "text-secondary-text hover:text-cyan hover:bg-cyan/10"
                   }`}
                 >
                   {type}
@@ -392,8 +407,17 @@ function App() {
             </div>
 
             <div className="flex justify-end gap-3">
+              <button 
+                className="px-4 py-2 rounded-lg text-secondary-text border border-cyan cursor-pointer"
+                onClick={() => {setShowAiModal(false)
+                  //  setIsAiSelected(false)
+                  // setSelectedStoryType("horror")
+                  }}
+              >
+                Cancel
+              </button>
               <button
-                className="px-5 rounded-lg bg-cyan text-app-bg font-semibold disabled:opacity-50"
+                className="px-4 py-2 rounded-lg bg-cyan text-app-bg font-semibold disabled:opacity-50 cursor-pointer"
                 onClick={generateAiStory}
                 disabled={loadingStory}
               >
