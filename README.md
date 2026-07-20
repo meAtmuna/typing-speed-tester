@@ -50,6 +50,7 @@ Then start the dev server:
 ![screenshot](src/assets/Screenshot2.png)
 ![screenshot](src/assets/Screenshot3.png)
 ![screenshot](src/assets/Screenshot4.png)
+![screenshot](src/assets/Screenshot5.png)
 
 ## Whats coming 
 This project still being worked on. Some feature I plan to add:
