@@ -1,4 +1,6 @@
+import { sign } from "chart.js/helpers"
 import { Link } from "react-router-dom"
+
 function Navbar() {
     return (
         <nav className="flex items-center justify-between py-6">
@@ -29,12 +31,18 @@ function Navbar() {
             </div>
 
             <div className="flex gap-3">
-                <button className="border border-cyan px-5 py-2 rounded-lg text-primary-text hover:bg-cyan/10 cursor-pointer transition-all">
+                <Link
+                    to="/login" 
+                    className="border border-cyan px-5 py-2 rounded-lg text-primary-text hover:bg-cyan/10 cursor-pointer transition-all"
+                >
                     Login
-                </button>
-                <button className="bg-cyan text-app-bg font-semibold px-5 py-2 rounded-lg hover:opacity-90 cursor-pointer transition-all">
+                </Link>
+                <Link 
+                    to="/signup"
+                    className="bg-cyan text-app-bg font-semibold px-5 py-2 rounded-lg hover:opacity-90 cursor-pointer transition-all"
+                >
                     Sign Up
-                </button>
+                </Link>
             </div>
         </nav>
     )
