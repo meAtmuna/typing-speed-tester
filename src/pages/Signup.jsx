@@ -1,6 +1,42 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import axios from "axios"
 
 function Signup() {
+    const navigate = useNavigate()
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setCofirmPassword] = useState("")
+
+
+    const handleSignup = async (e) => {
+        e.preventDefault()
+
+        if (password !== confirmPassword) {
+            alert("passwords do not match")
+            return
+        }
+
+        try {
+            const res = await axios.post(
+                "http://localhost:5000/api/auth/signup",
+                {
+                    name,
+                    email,
+                    password
+                }
+            )
+
+            console.log(res.data);
+            navigate("/login")
+
+        } catch (error) {
+            console.log(error.response.data.message);
+            
+        }
+    }
+
     return (
         <div className="min-h-screen bg-app-bg flex items-center justify-center px-6">
             <div className="bg-card border border-border rounded-2xl p-8 w-full max-w-md">
@@ -11,7 +47,10 @@ function Signup() {
                     Join TypeFast and start improving your typing today
                 </p>
 
-                <form className="space-y-5">
+                <form
+                    onSubmit={handleSignup} 
+                    className="space-y-5"
+                >
                      <div>
                         <label className="block mb-2 text-primary-text font-medium">
                             Full Name
@@ -20,6 +59,8 @@ function Signup() {
                         <input 
                             type="text"
                             placeholder="Enter your name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
                         />
                     </div>
@@ -31,6 +72,8 @@ function Signup() {
                         <input 
                             type="email"
                             placeholder="Enter your email"
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
                             className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
                         />
                     </div>
@@ -42,6 +85,8 @@ function Signup() {
                         <input 
                             type="password"
                             placeholder="Create a password"
+                            value={password}
+                            onChange={(e)=> setPassword(e.target.value)}
                             className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
                         />
                     </div>
@@ -52,10 +97,15 @@ function Signup() {
                         <input 
                                 type="password"
                                 placeholder="Confirm password"
+                                value={confirmPassword}
+                                onChange={(e)=>setCofirmPassword(e.target.value)}
                                 className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan"
                         />
                     </div>
-                    <button className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02]">
+                    <button
+                        type="submit" 
+                        className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02]"
+                    >
                         Create Account
                     </button>
                 </form>

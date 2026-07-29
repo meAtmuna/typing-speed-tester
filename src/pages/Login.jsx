@@ -1,6 +1,37 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import axios from "axios"
 
 function Login() {
+    const navigate = useNavigate()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const handleLogin = async (e) => {
+        e.preventDefault()
+
+        try {
+            const res = await axios.post(
+                "http://localhost:5000/api/auth/login",
+                {
+                    email,
+                    password
+                }
+            )
+
+            localStorage.setItem(
+                "token",
+                res.data.token
+            )
+            navigate("/typing-test")
+
+        } catch (error) {
+            console.log(error.response.data.message);
+            
+        }
+    }
+
+
     return (
         <div className="min-h-screen bg-app-bg flex items-center justify-center px-6">
             <div className="bg-card border border-border rounded-2xl p-8 w-full max-w-md">
@@ -11,15 +42,20 @@ function Login() {
                     Login to continue your typing journey
                 </p>
 
-                <form className="space-y-5">
+                <form
+                    onSubmit={handleLogin} 
+                    className="space-y-5"
+                >
                     <div>
                         <label className="block mb-2 text-primary-text font-medium">
                             Email
                         </label>
 
                         <input 
-                            type="email"
+                            type="email"                            
                             placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
                         />
                     </div>
@@ -31,6 +67,8 @@ function Login() {
                         <input 
                             type="password"
                             placeholder="Enter your password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
                         />
                     </div>
@@ -49,7 +87,10 @@ function Login() {
                             Forgot Password
                         </button>
                     </div>
-                    <button className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02]">
+                    <button
+                        type="submit" 
+                        className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02]"
+                    >
                         Login
                     </button>
                 </form>
