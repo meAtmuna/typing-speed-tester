@@ -102,8 +102,9 @@ function Login() {
                     </span>
                     <div className="flex-1 h-px bg-border"></div>
                 </div>
-                <button className="w-full border-border bg-transparent py-3 rounded-xl text-primary-text hover:border-cyan hover:bg-cyan/10 transition-all cursor-pointer">
-                        Continue with Google
+                <button className="w-full border-border bg-transparent py-3 rounded-xl text-primary-text hover:border-cyan hover:bg-cyan/10 transition-all cursor-pointer flex items-center justify-center gap-3">
+                    <i className="fa-brands fa-google text-lg text-cyan"></i>
+                    Continue with Google
                 </button>
                 <p className="text-center mt-8 text-secondary-text">
                     Don't have an account

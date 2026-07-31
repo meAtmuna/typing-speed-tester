@@ -6,32 +6,40 @@ const previewText = "The quick brown fox jumps over the lazy dog. Improve your t
 
 function Hero() {
     const [typedCount, setTypedCount] = useState (0)
+    const previewWPM = Math.min(Math.floor(typedCount * 1.2), 135)
 
     useEffect(() => {
         let pos =0
         let timeout
-
+        
         function type() {
             if (pos >= previewText.length ) {
                 timeout = setTimeout(() => {
                     pos = 0
                     setTypedCount(0)
-
+                    
                     timeout = setTimeout(type, 500)
                 }, 1500);
-
+                
                 return
             }
-
+            
+            const currentChar = previewText[pos]
+            
+            const delay = previewText[pos] === " "
+            ? 220
+            : 90 + Math.random() * 80
+            
             pos++
             setTypedCount(pos)
-            timeout =setTimeout(type, 60)
+            timeout = setTimeout(type, delay)
         }
         
         timeout = setTimeout(type, 500)
 
-        return () => clearInterval(timeout)
+        return () => clearTimeout(timeout)
     }, [])
+
     return (
         <section className="grid lg:grid-cols-2 items-center gap-16 py-24">
             <div>
@@ -59,13 +67,15 @@ function Hero() {
                     >
                         Start Typing
                     </Link>
-                    <Link
-                        to="#" 
+                    <a
+                        href="https://github.com/meAtmuna/typing-speed-tester"
+                        target="blank"
+                        rel="noopener noreferrer" 
                         className="border border-border px-8 py-4 rounded-xl hover:border-cyan transition-all cursor-pointer flex items-center gap-2"
                     >
                         <i className="fa-brands fa-github"></i>
                         GitHub
-                    </Link>
+                    </a>
                 </div>
 
                 <div className="flex gap-10 mt-12">
@@ -111,7 +121,7 @@ function Hero() {
                             className =  "text-correct"
                         }
                         else if (index === typedCount) {
-                            className = "bg-cyan text-app-bg rounded"
+                            className = "bg-cyan text-app-bg rounded animate-pulse"
                         }
 
                         return (
@@ -124,28 +134,28 @@ function Hero() {
                         )
                     })}
                 </div>
-                <div className="flex justify-between mt-8">
-                    <div>
-                        <h3 className="text-cyan text-3xl font-bold">
-                            120+
-                        </h3>
-                        <p className="text-secondary-text">
+                <div className="grid grid-cols-3 gap-4 mt-6">
+                    <div className="bg-typing border border-border rounded-xl p-4 text-center">
+                        <p className="text-wpm text-2xl font-bold font-mono">
+                            {previewWPM}
+                        </p>
+                        <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
                             WPM
                         </p>
                     </div>
-                    <div>
-                        <h3 className="text-cyan text-3xl font-bold">
-                            99%
-                        </h3>
-                        <p className="text-secondary-text">
+                    <div className="bg-typing border border-border rounded-xl p-4 text-center">
+                        <p className="text-accuracy text-2xl font-bold font-mono">
+                            100%
+                        </p>
+                        <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
                             Accuracy
                         </p>
                     </div>
-                    <div>
-                        <h3 className="text-cyan text-3xl font-bold">
+                    <div className="bg-typing border border-border rounded-xl p-4 text-center">
+                        <p className="text-cyan text-2xl font-bold font-mono">
                             AI
-                        </h3>
-                        <p className="text-secondary-text">
+                        </p>
+                        <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
                             Stories
                         </p>
                     </div>

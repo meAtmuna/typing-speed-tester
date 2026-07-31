@@ -14,7 +14,7 @@ function Navbar() {
                 </h1>
             </Link>
 
-            <div className="flex items-center gap-8">
+            {/* <div className="flex items-center gap-8">
                 <a 
                     href="#about"
                     className="text-secondary-text hover:text-cyan transition-all"
@@ -28,7 +28,7 @@ function Navbar() {
                 >
                     contact
                 </a>
-            </div>
+            </div> */}
 
             <div className="flex gap-3">
                 <Link
