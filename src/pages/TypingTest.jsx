@@ -9,12 +9,16 @@ import ContentSelector from "../components/ContentSelector"
 import WordSelector from "../components/WordSelector"
 import StorySelector from "../components/StorySelector"
 import ParagraphSelector from "../components/ParagraphSelector"
+import TimeSelector from "../components/TimeSelector"
 import { generateStory } from "../utils/ai"
 
 function TypingTest() {
   const [currentText, setCurrentText] = useState("")
   const [typedText, setTypedText] = useState("")
   const [timeLeft, setTimeLeft] =  useState(60)
+  const [timeLimit, setTimeLimit] = useState(60)
+  const [customTime, setCustomTime] = useState("")
+  const [showCustomTimeModal, setShowCustomTimeModal] = useState(false)
   const [testStarted, setTestStarted] = useState(false)
   const [testEnded, setTestEnded] = useState(false)
   const [contentType, setContentType] = useState("words")
@@ -98,7 +102,7 @@ function TypingTest() {
                     ? Math.round(((typedText.length - mistakes) / typedText.length) * 100)
                     : 100
 
-  const timeSpent = (60 - timeLeft) / 60
+  const timeSpent = (timeLimit - timeLeft) / 60
 
   const wpm = timeSpent > 0 ? Math.round(correctChars / 5 / timeSpent) : 0
 
@@ -166,6 +170,19 @@ function TypingTest() {
     resetTest()
   }
 
+  function applyCustomTime() {
+    const  time = Number(customTime)
+
+    if (time <= 0) return
+
+    setTimeLimit(time)
+    setTimeLeft(time)
+    setTypedText("")
+    setTestStarted(false)
+    setTestEnded(false)
+    setWpmHistory([])
+  }
+
   async function handleStory(type) {
     if (type !== "ai") {
       setSelectedStoryType(type)
@@ -219,9 +236,18 @@ function TypingTest() {
     resetTest()
   }
 
+  function changeTimeLimit(time) {
+    setTimeLimit(time)
+    setTimeLeft(time)
+    setTypedText("")
+    setTestStarted(false)
+    setTestEnded(false)
+    setWpmHistory([])
+  }
+
   function resetTest(shouldGenerate = true) {
     setTypedText("")
-    setTimeLeft(60)
+    setTimeLeft(timeLimit)
     setTestStarted(false)
     setTestEnded(false)
     setWpmHistory([])
@@ -287,6 +313,14 @@ function TypingTest() {
               changeParagraphDifficulty={changeParagraphDifficulty}
             />
           )}
+
+          {contentType === "time" && (
+            <TimeSelector
+              timeLimit={timeLimit}
+              changeTimeLimit={changeTimeLimit}
+              openCustomTimeModal={() => setShowCustomTimeModal(true)}
+            />
+          )}
         </div>
 
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
@@ -322,7 +356,7 @@ function TypingTest() {
 
       {showCustomModal && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-card border border-border rounded-2xl p-6 w[420px]">
+          <div className="bg-card border border-border rounded-2xl p-6 w-[420px]">
             <h2 className="text-xl font-bold mb-2">Custom Word Count</h2>
             <p className="text-secondary-text mb-4">
               Enter number of words
@@ -360,6 +394,55 @@ function TypingTest() {
                     applyCustomWords()
                     setShowCustomModal(false)
                   }}
+                >
+                  Apply
+                </button>
+              </div>
+          </div>
+        </div>
+      )}
+
+      {showCustomTimeModal &&  (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-card border border-border rounded-2xl p-6 w-[420px]">
+            <h2 className="text-xl font-bold mb-2">Custom Time</h2>
+            <p className="text-secondary-text mb-4">
+              Enter time in seconds
+            </p>
+
+            <input 
+                type="text"
+                placeholder="Enter seconds"
+                value={customTime}
+                onChange={(e) => {
+                  const value = e.target.value
+
+                  if (/^\d*$/.test(value)) {
+                    setCustomTime(value)
+                  }
+                }}
+                className={`w-full px-4 py-3 rounded-lg outline-none border mb-4 ${
+                  customTime.trim() === ""
+                    ? "border-red-500 bg-typing-box" 
+                    : "border-border bg-typing-box focus:border-cyan" 
+                } text-primary-text`}
+              />
+
+              <div className="flex gap-3 justify-end"> 
+                <button 
+                  className="px-4 py-2 rounded-lg text-secondary-text border border-cyan cursor-pointer"
+                  onClick={() => setShowCustomTimeModal(false)}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="px-4 py-2 rounded-lg bg-cyan text-app-bg font-semibold cursor-pointer"
+                  onClick={() => {
+                    applyCustomTime()
+                    setShowCustomTimeModal(false)
+                  }}
+                  disabled={customTime.trim() === ""}
                 >
                   Apply
                 </button>

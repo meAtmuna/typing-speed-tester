@@ -1,5 +1,5 @@
 function ContentSelector({contentType, changeContentMode}) {
-    const tabs = ["words", "paragraph", "story"]
+    const tabs = ["words", "paragraph", "story", "time"]
 
     return(
         <div className="flex gap-4">
