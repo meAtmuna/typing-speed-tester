@@ -31,6 +31,7 @@ function TypingTest() {
   const [paragraphDifficulty, setParagraphDifficulty] = useState("easy")
   const [selectedAiStoryType , setSelectedAiStoryType] = useState("horror")
   const [showAiModal, setShowAiModal] = useState(false)
+  const [activeSelector, setActiveSelector] = useState("words")
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -257,12 +258,26 @@ function TypingTest() {
     }
   }
 
-  function changeContentMode(mode) {
-    setContentType(mode)
-    setTypedText("")
-    setTimeLeft(60)
-    setTestStarted(false)
-    setTestEnded(false)    
+  // function changeContentMode(mode) {
+  //   setContentType(mode)
+  //   setTypedText("")
+  //   setTimeLeft(60)
+  //   setTestStarted(false)
+  //   setTestEnded(false)    
+  // }
+
+  function changeActiveSelector(selector) {
+    setActiveSelector(selector)
+
+    if (selector != "time") {
+      setContentType(selector)
+      setTypedText("")
+        setTestStarted(false)
+        setTestEnded(false)
+        setWpmHistory([])
+        setTimeLeft(timeLimit)
+      // resetTest()
+    }
   }
   
   if (testEnded) {
@@ -273,7 +288,7 @@ function TypingTest() {
         mistakes={mistakes} 
         resetTest={resetTest}
         wpmHistory={wpmHistory}
-        timeLeft={timeLeft}
+        timeLimit={timeLimit}
       />
     )
   }
@@ -288,11 +303,11 @@ function TypingTest() {
         
         <div className="bg-card border border-border rounded-xl p-3 mb-8 flex justify-between items-center gap-6">
           <ContentSelector 
-            contentType={contentType} 
-            changeContentMode={changeContentMode}
+            activeSelector={activeSelector} 
+            changeActiveSelector={changeActiveSelector}
           />
 
-          {contentType === "words" && (
+          {activeSelector === "words" && (
             <WordSelector  
               wordCount={wordCount} 
               changeWordCount={changeWordCount}
@@ -300,21 +315,21 @@ function TypingTest() {
             />
           )}    
 
-          {contentType === "story" && (
+          {activeSelector === "story" && (
             <StorySelector 
               handleStory={handleStory}
               selectedStoryType={selectedStoryType}
             />
           )}
 
-          {contentType === "paragraph" && (
+          {activeSelector === "paragraph" && (
             <ParagraphSelector
               paragraphDifficulty={paragraphDifficulty}
               changeParagraphDifficulty={changeParagraphDifficulty}
             />
           )}
 
-          {contentType === "time" && (
+          {activeSelector === "time" && (
             <TimeSelector
               timeLimit={timeLimit}
               changeTimeLimit={changeTimeLimit}

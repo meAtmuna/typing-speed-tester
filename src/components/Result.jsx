@@ -1,7 +1,7 @@
 import ResultChart from "./ResultChart"
 import { Activity } from 'lucide-react'
 
-function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLeft}) {
+function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLimit}) {
     async function shareResult() {
       const text = `My TypeFast Result
         WPM: ${wpm}
@@ -52,7 +52,7 @@ function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLeft})
               </div>
 
               <div className="bg-typing border border-border rounded-2xl p-5 text-center">
-                <p className="text-time text-4xl font-bold">{60 - timeLeft}s</p>
+                <p className="text-time text-4xl font-bold">{timeLimit}s</p>
                 <p className="text-muted-text uppercase text-sm mt-1">Time</p>
               </div>
             </div>
