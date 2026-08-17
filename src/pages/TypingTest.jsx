@@ -11,6 +11,8 @@ import StorySelector from "../components/StorySelector"
 import ParagraphSelector from "../components/ParagraphSelector"
 import TimeSelector from "../components/TimeSelector"
 import { generateStory } from "../utils/ai"
+import { Settings as SettingsIcon } from "lucide-react"
+import Settings from "../components/Settings"
 
 function TypingTest() {
   const [currentText, setCurrentText] = useState("")
@@ -32,6 +34,8 @@ function TypingTest() {
   const [selectedAiStoryType , setSelectedAiStoryType] = useState("horror")
   const [showAiModal, setShowAiModal] = useState(false)
   const [activeSelector, setActiveSelector] = useState("words")
+  const [showSettings, setShowSettings] = useState(false)
+  const [soundEnabled, setSoundEnabled] = useState(true)
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -81,7 +85,7 @@ function TypingTest() {
 
     const value = e.target.value
 
-    if (value.length > typedText.length) {
+    if (value.length > typedText.length && soundEnabled) {
       keySound.current.currentTime = 0
       keySound.current.play().catch(() => {})
     }
@@ -296,10 +300,18 @@ function TypingTest() {
   return (
     <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10">
       <div className="max-w-5xl w-full">
-        <h1 className="text-3xl font-bold mb-8 flex items-center gap-2.5">
-          <i className="fa-solid fa-keyboard text-cyan"></i>
-          Type<span className="text-cyan">Fast</span>
-        </h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold flex items-center gap-2.5">
+            <i className="fa-solid fa-keyboard text-cyan"></i>
+            Type<span className="text-cyan">Fast</span>
+          </h1>
+
+          <button
+            onClick={() => setShowSettings(true)}
+            className="p-2 text-secondary-text hover:text-cyan hover:bg-cyan/10 rounded-lg transition-all cursor-pointer">
+            <SettingsIcon size={22}/>
+          </button>
+        </div>
         
         <div className="bg-card border border-border rounded-xl p-3 mb-8 flex justify-between items-center gap-6">
           <ContentSelector 
@@ -507,6 +519,14 @@ function TypingTest() {
             </div>
           </div>  
         </div>
+      )}
+
+      {showSettings && (
+        <Settings
+          closeSettings={() => setShowSettings(false)}
+          soundEnabled={soundEnabled}
+          changeSoundEnabled={setSoundEnabled}
+        />
       )}
     </div>
   )
