@@ -1,6 +1,6 @@
-function Stats({ timeLeft, wpm, mistakes, accuracy }) {
+function Stats({ timeLeft, wpm, mistakes, accuracy, hideTimer, testStarted }) {
   const stats = [
-    { label: "TIME" , value: `${timeLeft}s` , color: "text-time"},
+    { label: "TIME" , value: hideTimer && testStarted ? "..." : `${timeLeft}s` , color: "text-time"},
     { label: "WPM" , value: wpm , color: "text-wpm"},
     { label: "ACCURACY" , value: `${accuracy}%` , color: "text-accuracy"},
     { label: "MISTAKES" , value: mistakes , color: "text-mistake"},

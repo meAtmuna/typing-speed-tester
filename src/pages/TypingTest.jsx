@@ -37,6 +37,7 @@ function TypingTest() {
   const [showSettings, setShowSettings] = useState(false)
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [isPasued, setIsPaused] = useState(false)
+  const [hideTimer, setHideTimer] = useState(false)
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -357,7 +358,14 @@ function TypingTest() {
           )}
         </div>
 
-        <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
+        <Stats 
+          timeLeft={timeLeft} 
+          wpm={wpm} 
+          mistakes={mistakes} 
+          accuracy={accuracy} 
+          hideTimer={hideTimer} 
+          testStarted={testStarted}
+        />
 
         <div className="flex justify-center mb-6">
           {!testStarted ? (
@@ -549,6 +557,8 @@ function TypingTest() {
           closeSettings={() => setShowSettings(false)}
           soundEnabled={soundEnabled}
           changeSoundEnabled={setSoundEnabled}
+          hideTimer={hideTimer}
+          changeHideTimer={setHideTimer}
         />
       )}
     </div>
