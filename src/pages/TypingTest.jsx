@@ -36,6 +36,7 @@ function TypingTest() {
   const [activeSelector, setActiveSelector] = useState("words")
   const [showSettings, setShowSettings] = useState(false)
   const [soundEnabled, setSoundEnabled] = useState(true)
+  const [isPasued, setIsPaused] = useState(false)
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -49,7 +50,7 @@ function TypingTest() {
   }, [contentType, wordCount, paragraphDifficulty, selectedStoryType,])
 
   useEffect(()=> {
-    if (!testStarted || testEnded) return
+    if (!testStarted || testEnded || isPasued) return
     
     const timer = setInterval(() => {
       setWpmHistory((old) => [...old, wpmRef.current])
@@ -66,7 +67,7 @@ function TypingTest() {
     }, 1000);
 
     return () => clearInterval(timer)
-  }, [testStarted, testEnded])
+  }, [testStarted, testEnded, isPasued])
 
   useEffect(() => {
     if (currentText.length > 0 && typedText.length === currentText.length) {
@@ -81,7 +82,7 @@ function TypingTest() {
   }, [testEnded])
 
   function updateTypedText(e) {
-    if (testEnded) return
+    if (testEnded || isPasued) return
 
     const value = e.target.value
 
@@ -298,7 +299,13 @@ function TypingTest() {
   }
 
   return (
-    <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10">
+    <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10"
+      onClick={() => {
+        if (!testEnded) {
+          inputRef.current?.focus()
+        }
+      }}
+    >
       <div className="max-w-5xl w-full">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold flex items-center gap-2.5">
@@ -352,19 +359,35 @@ function TypingTest() {
 
         <Stats timeLeft={timeLeft} wpm={wpm} mistakes={mistakes} accuracy={accuracy}/>
 
-        {!testStarted && (
-          <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-6">
+          {!testStarted ? (
             <button
-              className="px-8 py-3 bg-cyan text-app-bg font-semibold rounded-xl" 
+              className="px-8 py-3 bg-cyan text-app-bg font-semibold rounded-xl cursor-pointer transition-all" 
               onClick={() => {
                 setTestStarted(true)
+                setIsPaused(false)
                 inputRef.current?.focus()
               }}
             >
               Start Typing
             </button>
-          </div>
-        )}
+          ) : (
+            <button 
+              className="px-8 py-3 bg-cyan text-app-bg font-semibold rounded-xl cursor-pointer transition-all" 
+              onClick={() => {
+                setIsPaused(!isPasued)
+
+                if (isPasued) {
+                  setTimeout(() => {
+                    inputRef.current?.focus()
+                  }, 0);
+                }
+              }}
+            >
+              {isPasued ? "Resume Typing" : "Pause Typing"}
+            </button>
+          )}
+      </div>
 
         <div>
           <TypingArea currentText={currentText} typedText={typedText}/>
@@ -377,7 +400,7 @@ function TypingTest() {
           onChange={updateTypedText}
           className="opacity-0 pointer-events-none fixed"
           autoFocus
-          disabled={testEnded}
+          disabled={testEnded || isPasued}
         />
       </div>
 
