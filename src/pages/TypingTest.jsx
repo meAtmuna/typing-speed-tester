@@ -327,35 +327,40 @@ function TypingTest() {
             changeActiveSelector={changeActiveSelector}
           />
 
-          {activeSelector === "words" && (
-            <WordSelector  
-              wordCount={wordCount} 
-              changeWordCount={changeWordCount}
-              openCustomModal={() => setShowCustomModal(true)}
-            />
-          )}    
+          <div 
+            key={activeSelector}
+            className="animate-[fadeIn_0.25s_ease-out]"
+          >
+            {activeSelector === "words" && (
+              <WordSelector  
+                wordCount={wordCount} 
+                changeWordCount={changeWordCount}
+                openCustomModal={() => setShowCustomModal(true)}
+              />
+            )}    
 
-          {activeSelector === "story" && (
-            <StorySelector 
-              handleStory={handleStory}
-              selectedStoryType={selectedStoryType}
-            />
-          )}
+            {activeSelector === "story" && (
+              <StorySelector 
+                handleStory={handleStory}
+                selectedStoryType={selectedStoryType}
+              />
+            )}
 
-          {activeSelector === "paragraph" && (
-            <ParagraphSelector
-              paragraphDifficulty={paragraphDifficulty}
-              changeParagraphDifficulty={changeParagraphDifficulty}
-            />
-          )}
+            {activeSelector === "paragraph" && (
+              <ParagraphSelector
+                paragraphDifficulty={paragraphDifficulty}
+                changeParagraphDifficulty={changeParagraphDifficulty}
+              />
+            )}
 
-          {activeSelector === "time" && (
-            <TimeSelector
-              timeLimit={timeLimit}
-              changeTimeLimit={changeTimeLimit}
-              openCustomTimeModal={() => setShowCustomTimeModal(true)}
-            />
-          )}
+            {activeSelector === "time" && (
+              <TimeSelector
+                timeLimit={timeLimit}
+                changeTimeLimit={changeTimeLimit}
+                openCustomTimeModal={() => setShowCustomTimeModal(true)}
+              />
+            )}
+          </div>
         </div>
 
         <Stats 
@@ -397,7 +402,10 @@ function TypingTest() {
           )}
       </div>
 
-        <div>
+        <div
+          key={currentText}
+          className="animate-[typingAreaIn_0.35s_ease-out]"
+        >
           <TypingArea currentText={currentText} typedText={typedText}/>
         </div>
 

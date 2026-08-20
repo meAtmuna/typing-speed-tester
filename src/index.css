@@ -22,3 +22,32 @@
     --color-untyped: #334155;
     --color-correct: #94a3b8;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes typingAreaIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    
+    to {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes cursorPulse {
+    0%, 100% { opacity: 1;}
+    50% { opacity: 0;}
+}

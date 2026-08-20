@@ -29,7 +29,7 @@ function TypingArea({currentText, typedText}) {
                     }
                   }
                 } else if (currentIndex === typedText.length) {
-                  styles =  "bg-cyan text-app-bg rounded"
+                  styles =  "bg-cyan text-app-bg rounded animate-[cursorPulse_1s_step-end_infinite]"
                 }
 
                 return (
