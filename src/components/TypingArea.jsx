@@ -1,4 +1,16 @@
+import { useEffect, useRef } from "react"
+
 function TypingArea({currentText, typedText}) {
+    const currentCharRef = useRef(null)
+
+    useEffect(() => {
+      if (currentCharRef.current) {
+        currentCharRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        })
+      }
+    }, [typedText])
     return (
          <div className="bg-typing border border-border rounded-2xl p-8 text-3xl leading-relaxed cursor-text">
             {currentText.split("").map((char, currentIndex) =>{
@@ -21,7 +33,15 @@ function TypingArea({currentText, typedText}) {
                 }
 
                 return (
-                <span key={currentIndex} className={styles}>
+                <span 
+                  key={currentIndex} 
+                  className={styles}
+                  ref={
+                    currentIndex === typedText.length
+                      ? currentCharRef
+                      : null
+                  }
+                >
                     {char}
                 </span>
                 )

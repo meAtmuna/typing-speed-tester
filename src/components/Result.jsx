@@ -1,28 +1,42 @@
+import { useState } from "react";
 import ResultChart from "./ResultChart"
-import { Activity } from 'lucide-react'
+import { Activity, Share2, Check, RotateCcw} from 'lucide-react'
 
 function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLimit}) {
+    const [shareStatus, setShareStatus] = useState("")
+
     async function shareResult() {
       const text = `My TypeFast Result
-        WPM: ${wpm}
-        Accuracy: ${accuracy}%
-        Mistakes: ${mistakes}
-      Practice on TypeFast!
-      `;
 
-      try{
-        if (navigator.share) {
-          await navigator.share({
+  WPM: ${wpm}
+  Accuracy: ${accuracy}%
+  Mistakes: ${mistakes}
+  Time: ${timeLimit}s
+
+  Practice on TypeFast!`;
+
+    try{
+      if (navigator.share) {
+        await navigator.share({
             title: "My TypeFast Result",
             text,
           });
-        } else if (navigator.clipboard) {
+
+          setShareStatus("Shared!")
+        } 
+        else if (navigator.clipboard) {
           await navigator.clipboard.writeText(text);
-          alert("Result copied to clipboard");
+          setShareStatus("Copied!");
         }
+
+        setTimeout(() => {
+          setShareStatus("")
+        }, 2000);
+
       } catch (err) {
-        console.log(err);
-        alert("Unable to share result.")
+        if (err.name !== "AbortError") {
+          console.log(err);
+        }
       }
     }
     return(
@@ -64,17 +78,28 @@ function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLimit}
             
             <div className="flex gap-4">
               <button
-                className="flex-1 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10 cursor-pointer"
+                className="flex-1 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10 cursor-pointer flex items-center justify-center gap-2 hover:scale-[1.02]"
                 onClick={resetTest}
               >
-                Try Again
+                <RotateCcw size={18}/>
+                <span>Try Again</span>
               </button>
 
               <button
-                className="px-8 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10 cursor-pointer"
+                className="px-8 py-3 rounded-xl border border-border hover:border-cyan text-primary-text transition-all hover:bg-cyan/10 cursor-pointer flex items-center justify-center gap-2 min-w-[130px]"
                 onClick={shareResult}
               >
-                Share
+                {shareStatus ? (
+                  <>
+                    <Check size={18} className="text-cyan" />
+                    {shareStatus}
+                  </>
+                ) : (
+                  <>
+                    <Share2 size={18} />
+                    Share
+                  </>
+                )}
               </button>
             </div>
           </div>

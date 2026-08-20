@@ -83,7 +83,7 @@ function TypingTest() {
   }, [testEnded])
 
   function updateTypedText(e) {
-    if (testEnded || isPasued) return
+    if (!testStarted || testEnded || isPasued) return
 
     const value = e.target.value
 
@@ -92,9 +92,9 @@ function TypingTest() {
       keySound.current.play().catch(() => {})
     }
 
-    if (!testStarted) {
-      setTestStarted(true)
-    }
+    // if (!testStarted) {
+    //   setTestStarted(true)
+    // }
 
     setTypedText(value)
   }
@@ -302,7 +302,7 @@ function TypingTest() {
   return (
     <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10"
       onClick={() => {
-        if (!testEnded) {
+        if (testStarted && !testEnded && !isPasued) {
           inputRef.current?.focus()
         }
       }}
@@ -407,7 +407,6 @@ function TypingTest() {
           value={typedText}
           onChange={updateTypedText}
           className="opacity-0 pointer-events-none fixed"
-          autoFocus
           disabled={testEnded || isPasued}
         />
       </div>
