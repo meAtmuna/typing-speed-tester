@@ -1,9 +1,10 @@
-import { X, Volume2, VolumeX, Settings2, Eye, EyeOff } from "lucide-react"
+import { X, Volume2, VolumeX, Settings2, Eye, EyeOff, TextCursorIcon, RectangleHorizontal, Minus, FlipVertical, GripVertical, GripVerticalIcon } from "lucide-react"
+import { Line } from "react-chartjs-2"
 
-function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, changeHideTimer}) {
+function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, changeHideTimer, cursorStyle, changeCursorStyle}) {
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 backdrop-blur-sm px-4">
-            <div className="bg-card border border-border rounded-2xl w-full max-w-[420px] shadow-2xl overflow-hidden">
+            <div className="bg-card border border-border rounded-2xl w-full max-w-[650px] shadow-2xl overflow-hidden">
                 <div className="flex justify-between items-start p-6 border-b border-border">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-xl bg-cyan/10 flex items-center justify-center">
@@ -129,6 +130,74 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                                 >
                             </div>
                         </button>
+                    </div>
+
+                    <div className="border-t border-border my-5"></div>
+
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center">
+                                <TextCursorIcon size={20}/>
+                            </div>
+
+                            <div>
+                                <p className="font-medium text-primary-text">
+                                    Cursor Style
+                                </p>
+
+                                <p className="text-sm text-secondary-text mt-1">
+                                    Choose your typing cursor
+                                </p>
+                            </div>
+                        </div>
+
+                        <div  className="relative flex items-center gap-1 rounded-full bg-secondary-text/10">
+                            <div 
+                                className={`absolute top-1 bottom-1 rounded-full bg-cyan/15 transition-all duration-300 ease-out ${
+                                    cursorStyle === "block"
+                                        ? "left-1 w-[78px]"
+                                        : cursorStyle === "underline"
+                                        ? "left-[83px] w-[105px]"
+                                        : "left-[193px] w-[70px]"
+                                }`} 
+                            />
+                            {[
+                                {
+                                    name: "block",
+                                    label: "Block",
+                                    icon: RectangleHorizontal
+                                },
+                                {
+                                    name: "underline",
+                                    label: "Underline",
+                                    icon: Minus
+                                },
+                                {
+                                    name: "bar",
+                                    label: "Bar",
+                                    icon: GripVerticalIcon
+                                }
+                            ].map(({ name, label, icon: Icon}) =>{
+                                const active = cursorStyle === name
+                                
+                                return (
+                                    <button
+                                        key={name}
+                                        onClick={() => changeCursorStyle(name)}
+                                        className={`relative z-10 rounded-full flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-300 cursor-pointer active:scale-95 ${
+                                            active
+                                                ? "text-cyan"
+                                                : "text-secondary-text hover:text-primary-text"
+                                        }`}
+                                    >
+                                        <span>
+                                            {label}
+                                        </span>
+                                        <Icon size={16} />
+                                    </button>
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
 

@@ -38,6 +38,7 @@ function TypingTest() {
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [isPaused, setIsPaused] = useState(false)
   const [hideTimer, setHideTimer] = useState(false)
+  const [cursorStyle, setCursorStyle] = useState("block")
   const inputRef = useRef(null)
   const wpmRef = useRef(0)
   
@@ -83,7 +84,7 @@ function TypingTest() {
   }, [testEnded])
 
   function updateTypedText(e) {
-    if (!testStarted || testEnded || isPasued) return
+    if (!testStarted || testEnded || isPaused) return
 
     const value = e.target.value
 
@@ -410,7 +411,7 @@ function TypingTest() {
           key={currentText}
           className="animate-[typingAreaIn_0.35s_ease-out]"
         >
-          <TypingArea currentText={currentText} typedText={typedText}/>
+          <TypingArea currentText={currentText} typedText={typedText} cursorStyle={cursorStyle}/>
         </div>
 
         <input
@@ -570,6 +571,8 @@ function TypingTest() {
           changeSoundEnabled={setSoundEnabled}
           hideTimer={hideTimer}
           changeHideTimer={setHideTimer}
+          cursorStyle={cursorStyle}
+          changeCursorStyle={setCursorStyle}
         />
       )}
     </div>

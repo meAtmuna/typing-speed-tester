@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-function TypingArea({currentText, typedText}) {
+function TypingArea({currentText, typedText, cursorStyle}) {
     const currentCharRef = useRef(null)
 
     useEffect(() => {
@@ -29,7 +29,15 @@ function TypingArea({currentText, typedText}) {
                     }
                   }
                 } else if (currentIndex === typedText.length) {
-                  styles =  "bg-cyan text-app-bg rounded animate-[cursorPulse_1s_step-end_infinite]"
+                  if (cursorStyle === "block") {
+                    styles =  "bg-cyan text-app-bg rounded animate-[cursorPulse_1s_step-end_infinite]"
+                  }
+                  if (cursorStyle === "underline") {
+                    styles =  "text-untyped border-b-4 border-cyan animate-[cursorPulse_1s_step-end_infinite]"
+                  }
+                  if (cursorStyle === "bar") {
+                    styles =  "text-untyped border-l-4 border-cyan animate-[cursorPulse_1s_step-end_infinite]"
+                  }
                 }
 
                 return (
