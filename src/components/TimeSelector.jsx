@@ -1,32 +1,38 @@
 function TimeSelector({timeLimit, changeTimeLimit, openCustomTimeModal}) {
     const timeOptions = [15, 30, 45, 60, 90, 120]
-    const iscustomIime = !timeOptions.includes(timeLimit)
+    const isCustomIime = !timeOptions.includes(timeLimit)
 
     return(
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5">
                 {timeOptions.map((time) => (
                     <button
                         key={time}
                         onClick={() => changeTimeLimit(time)}
-                        className={`px-4 py-2 rounded-lg transition-all cursor-pointer ${
+                        className={`relative font-medium duration-200 active:scale-95 px-4 py-2 rounded-lg transition-all cursor-pointer ${
                             timeLimit === time
-                                ? "bg-cyan/15 text-cyan"
-                                : "text-secondary-text hover:text-cyan hover:bg-cyan/10"
+                                ? "text-cyan"
+                                : "text-secondary-text hover:text-primary-text hover:bg-white/5"
                         }`}
                     >
-                        {time}s
+                        {timeLimit === time && (
+                            <span className="absolute inset-0 rounded-lg bg-cyan/10 animate-[fadeIn_0.15s_ease-out]" />
+                        )}
+                        <span className="relative z-10">{time}s</span>
                     </button>
                 ))}
 
                 <button
-                    className={`px-4 py-2 rounded-lg transition-all cursor-pointer ${
-                        iscustomIime
-                        ? "bg-cyan/15 text-cyan"
-                        : "text-secondary-text hover:text-cyan hover:bg-cyan/10" 
+                    className={`relative font-medium duration-200 active:scale-95 px-4 py-2 rounded-lg transition-all cursor-pointer ${
+                        isCustomIime
+                        ? "text-cyan"
+                        : "text-secondary-text hover:text-primary-text hover:bg-white/5" 
                     }`}
                     onClick={openCustomTimeModal}
                 >
-                    Custom
+                    {isCustomIime && (
+                    <span className="absolute inset-0 rounded-lg bg-cyan/10 animate-[fadeIn_0.15s_ease-out]" />
+                )}
+                <span className="relative z-10">Custom</span>
                 </button>
             </div>
     )

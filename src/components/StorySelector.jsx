@@ -1,36 +1,48 @@
-function StorySelector({handleStory, selectedStoryType, isAiSelected}) {
+function StorySelector({handleStory, selectedStoryType}) {
     const storyTypes = ["horror" , "funny", "adventure"]
 
     return (
-        <div className="flex gap-3">
+        <div className="flex gap-1.5 items-center">
             {storyTypes.map((type) => {
                 const active = selectedStoryType === type
                 
                 return (    
                     <button
                         key={type}
-                        className={`px-4 py-2 rounded-lg transition-all cursor-pointer capitalize ${
+                        className={`relative font-medium duration-200 active:scale-95 px-4 py-2 rounded-lg transition-all cursor-pointer capitalize ${
                             active
-                                ? "bg-cyan/15 text-cyan"
-                                : "text-secondary-text hover:text-cyan hover:bg-cyan/10"
+                                ? "text-cyan"
+                                : "text-secondary-text hover:text-primary-text hover:bg-white/15"
                         }`}
                         onClick={() => handleStory(type)}
                     >
-                        {type}
+                        {active && (
+                            <span className="absolute inset-0 rounded-lg bg-cyan/10 animate-[fadeIn_0.15s_ease-out]" />
+                        )}
+
+                        <span className="relative z-10">
+                            {type}
+                        </span>
                     </button>
                 )                
             })}
 
             <button 
-                className={`px-4 py-2 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`relative font-medium duration-200 active:scale-95 px-4 py-2 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
                 selectedStoryType === "ai"
-                    ? "bg-cyan/15 text-cyan"
-                    : "text-secondary-text hover:text-cyan hover:bg-cyan/10"
+                    ? "text-cyan"
+                    : "text-secondary-text hover:text-primary-text hover:bg-cyan/5"
                 }`}
                 onClick={()=> handleStory("ai")}
             >
-                <i className="fa-solid fa-wand-magic-sparkles text-xs" />
-                AI
+                {selectedStoryType === "ai" && (
+                    <span className="absolute inset-0 rounded-lg bg-cyan/10 animate-[fadeIn_0.15s_ease-out]" />
+                )}
+
+                <span className="relative z-10">
+                    <i className="fa-solid fa-wand-magic-sparkles text-xs" />
+                    AI
+                </span>
             </button>
         </div>
     )
