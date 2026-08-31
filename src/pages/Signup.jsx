@@ -1,22 +1,30 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
+import { Eye, EyeOff } from "lucide-react"
 
 function Signup() {
     const navigate = useNavigate()
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [confirmPassword, setCofirmPassword] = useState("")
-
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const handleSignup = async (e) => {
         e.preventDefault()
 
+        setErrorMessage("")
+
         if (password !== confirmPassword) {
-            alert("passwords do not match")
+            setErrorMessage("passwords do not match")
             return
         }
+
+        setLoading(true)
 
         try {
             const res = await axios.post(
@@ -32,8 +40,12 @@ function Signup() {
             navigate("/login")
 
         } catch (error) {
-            console.log(error.response.data.message);
-            
+            setErrorMessage(
+                error.response?.data?.message ||
+                "Something went wrong"
+            );
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -51,7 +63,13 @@ function Signup() {
                     onSubmit={handleSignup} 
                     className="space-y-5"
                 >
-                     <div>
+                    {errorMessage && (
+                        <p className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+                            {errorMessage}
+                        </p>
+                    )}
+
+                    <div>
                         <label className="block mb-2 text-primary-text font-medium">
                             Full Name
                         </label>
@@ -81,32 +99,64 @@ function Signup() {
                         <label className="block mb-2 text-primary-text font-medium">
                             Password
                         </label>
+                        <div className="relative">
+                            <input 
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Create a password"
+                                value={password}
+                                onChange={(e)=> setPassword(e.target.value)}
+                                className="w-full px-4 py-3 pr-12 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
+                            />
 
-                        <input 
-                            type="password"
-                            placeholder="Create a password"
-                            value={password}
-                            onChange={(e)=> setPassword(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
-                        />
+                            <button 
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-cyan transition cursor-pointer"
+                                aria-label={showPassword ? "Hide password" : "Show password"}
+                            >
+                                {showPassword ? (
+                                    <EyeOff size={18} />
+                                ) : (
+                                    <Eye size={18} />
+                                )}
+                            </button>
+                        </div>
                     </div>
                     <div>
                         <label className="block mb-2 text-primary-text font-medium">
                             Confirm Password
                         </label>
-                        <input 
-                                type="password"
-                                placeholder="Confirm password"
-                                value={confirmPassword}
-                                onChange={(e)=>setCofirmPassword(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan"
-                        />
+
+                        <div className="relative">
+                            <input 
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    placeholder="Confirm password"
+                                    value={confirmPassword}
+                                    onChange={(e)=>setConfirmPassword(e.target.value)}
+                                    className="w-full px-4 py-3 pr-12 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan"
+                            />
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setShowConfirmPassword(!showConfirmPassword)
+                                }
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-cyan transition cursor-pointer"
+                                aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                            >
+                                {showConfirmPassword ? (
+                                    <EyeOff size={18} />
+                                ) : (
+                                    <Eye size={18} />
+                                )}
+                            </button>
+                        </div>
                     </div>
                     <button
-                        type="submit" 
-                        className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02]"
+                        type="submit"
+                        disabled={loading}
+                        className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
-                        Create Account
+                        {loading ? "Creating Account..." : "Create Account"}
                     </button>
                 </form>
 

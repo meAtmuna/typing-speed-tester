@@ -1,14 +1,21 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
+import { Eye, EyeOff } from "lucide-react"
 
 function Login() {
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [showPassword, setShowPassword] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const handleLogin = async (e) => {
         e.preventDefault()
+
+        setErrorMessage("")
+        setLoading(true)
 
         try {
             const res = await axios.post(
@@ -19,15 +26,16 @@ function Login() {
                 }
             )
 
-            localStorage.setItem(
-                "token",
-                res.data.token
-            )
+            localStorage.setItem("token", res.data.token)
+            localStorage.setItem("user", JSON.stringify(res.data.user))
             navigate("/typing-test")
 
         } catch (error) {
-            console.log(error.response.data.message);
-            
+            setErrorMessage(
+                error.response?.data?.message || "Something went wrong"
+            );
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -46,6 +54,11 @@ function Login() {
                     onSubmit={handleLogin} 
                     className="space-y-5"
                 >
+                    {errorMessage && (
+                        <p className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+                            {errorMessage}
+                        </p>
+                    )}
                     <div>
                         <label className="block mb-2 text-primary-text font-medium">
                             Email
@@ -63,14 +76,28 @@ function Login() {
                         <label className="block mb-2 text-primary-text font-medium">
                             Password
                         </label>
+                        <div className="relative">
+                            <input 
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter your password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
+                            />
 
-                        <input 
-                            type="password"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
-                        />
+                            <button 
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-cyan transition cursor-pointer"
+                                aria-label={showPassword ? "Hide password" : "Show password"}
+                            >
+                                {showPassword ? (
+                                    <EyeOff size={18} />
+                                ) : (
+                                    <Eye size={18} />
+                                )}
+                            </button>
+                        </div>
                     </div>
                     <div className="flex justify-between items-center text-sm">
                         <label className="flex items-center gap-2 text-primary-text cursor-pointer">
@@ -88,10 +115,11 @@ function Login() {
                         </button>
                     </div>
                     <button
-                        type="submit" 
-                        className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02]"
+                        type="submit"
+                        disabled={loading} 
+                        className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
-                        Login
+                        {loading ? "Logging in..." : "Login"}
                     </button>
                 </form>
 
