@@ -1,21 +1,42 @@
 # TypeFast (Typing Speed Tester)
 
-A typing speed test web built with React. Pick a mode, start typing and see how fast you actually are.
+TypeFast is a simple typing speed tester built wiht React. You can practice with random words, paragraph, or stories and see your typing speed, accuracy, mistakes, and time while you type. Pick a mode, start typing and see how fast you actually are.
+
+I built this project to practice React, frontend developmnet, APIs, and backend authentication.
 
 ## What it does
 * Tests yout typing speed in WPM (words per minute)
-* Three modes: random words, paragraphs, and AI generated stories
-* Paragraph mode has esay/ medium/ hard difficulty levels
-* Live stats while you type --> WPM, Accuracy, Mistakes, Time
-* Result screen with a wpm-over-time chart so you can see if you warmed up or slowed down 
-* Keyboard sound on every keypress
-* Share your result or copy it to clipboard
+* Three typing modes: Words, paragraphs, and Stories
+* Choose between 10, 25, 50, 100 or custom number of words
+* Custom word count up to 1000 words
+* Paragraph mode with esay/ medium/ hard difficulty levels
+* Story mode with Horror, Funny , and Adventure categories
+* AI-generatd stories using the Gemini API 
+* Live WPM, Accuracy, Mistakes, and Time stats
+* Pause and resume the typing test
+* Custom timer
+* WPM history chart after fininshing  a test
+* keyborad sound while typing
+* Settings for keyboard sound , timer visbility, and cursor style
+* Login an signup system
+* Password visibility toggle
+* JWT-based authentication
+* User data stored in MongoDB
+* Result screen after completing a test
 
-## Modes
+## Typing Modes
 - Words 
-    You choose how many: 10, 25, 50, 100 or a custom number up to 1000. Good for pure speed practice.
+    Practice wiht random words
+    You can choose:
+        10
+        25
+        50
+        100
+        custom amount (up to 1000 words)
+    This mode is useful when you just want to focus on typing speed.
+
 - Paragraph
-    Three difficulty levels:
+    Practice wiht different difficulty levels:
     -- Easy: short sentences, everyday vocabulary
     -- Medium: longer sentences, more complex topics
     -- Hard: academic and technical language philosophy, science, economics
