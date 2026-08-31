@@ -1,4 +1,4 @@
-import { X, Volume2, VolumeX, Settings2, Eye, EyeOff, TextCursorIcon, RectangleHorizontal, Minus, FlipVertical, GripVertical, GripVerticalIcon } from "lucide-react"
+import { X, Volume2, VolumeX, Settings2, Eye, EyeOff, TextCursorIcon, RectangleHorizontal, Minus, GripVertical, Minimize2, MinusIcon, } from "lucide-react"
 import { Line } from "react-chartjs-2"
 
 function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, changeHideTimer, cursorStyle, changeCursorStyle}) {
@@ -151,14 +151,14 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                             </div>
                         </div>
 
-                        <div  className="relative flex items-center gap-1 rounded-full bg-secondary-text/10">
+                        <div  className="gap-2 p-2 relative flex items-center rounded-full bg-secondary-text/10 overflow-hidden">
                             <div 
-                                className={`absolute top-1 bottom-1 rounded-full bg-cyan/15 transition-all duration-300 ease-out ${
+                                className={`w-[92px] absolute top-1.5 bottom-1.5 rounded-full bg-cyan/15 transition-transform duration-300 ease-out ${
                                     cursorStyle === "block"
-                                        ? "left-1 w-[78px]"
+                                        ? "translate-x-0"
                                         : cursorStyle === "underline"
-                                        ? "left-[83px] w-[105px]"
-                                        : "left-[193px] w-[70px]"
+                                        ? "translate-x-[95px]"
+                                        : "translate-x-[194px]"
                                 }`} 
                             />
                             {[
@@ -175,7 +175,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                                 {
                                     name: "bar",
                                     label: "Bar",
-                                    icon: GripVerticalIcon
+                                    icon: GripVertical
                                 }
                             ].map(({ name, label, icon: Icon}) =>{
                                 const active = cursorStyle === name
@@ -184,7 +184,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                                     <button
                                         key={name}
                                         onClick={() => changeCursorStyle(name)}
-                                        className={`relative z-10 rounded-full flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors duration-300 cursor-pointer active:scale-95 ${
+                                        className={`w-[90px] relative z-10 rounded-full flex items-center justify-center gap-1 py-1 text-sm font-medium transition-colors duration-300 cursor-pointer active:scale-95 ${
                                             active
                                                 ? "text-cyan"
                                                 : "text-secondary-text hover:text-primary-text"
