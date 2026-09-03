@@ -28,55 +28,145 @@ I built this project to practice React, frontend developmnet, APIs, and backend 
 - Words 
     Practice wiht random words
     You can choose:
-        10
-        25
-        50
-        100
-        custom amount (up to 1000 words)
+    * 10
+    * 25
+    * 50
+    * 100
+    * custom amount (up to 1000 words)
     This mode is useful when you just want to focus on typing speed.
 
 - Paragraph
     Practice wiht different difficulty levels:
-    -- Easy: short sentences, everyday vocabulary
-    -- Medium: longer sentences, more complex topics
-    -- Hard: academic and technical language philosophy, science, economics
+    * Easy -  simple sentences and everyday English
+    * Medium -  longer sentences and slightly harder vocabulary
+    * Hard - more complex topics and vocabulary
+
 - Story 
-    Generates a fresh story using the Gemini AI API every time. Pick horror, funny or adventure. Since its AI generated. you get something different on every attempt.
+    Story mode gvies you longer content to type.
+    There are local story categories:
+    * Horror
+    * Funny
+    * Adventure
+    There is also AI Story option. You can select a category and TypeFast generates a new story using thte Gemini API.
+
+- Timer
+    You can choose different test durations from the time selector.
+    You can also enter a custom time in seconds.
+    The test can be paused and resumed whenever you want.
+
+- Settings
+    TypeFast includes a small settings panel where you cna change: 
+    * Keyboard sound on/off
+    * Show or hide the timer
+    * Typing cursor style 
+
+- Results
+    After completing a test, TypeFast shows your result including:
+    * WPM
+    * Accuracy
+    * Mistakes
+    * WPM history
+    The WPM history is displayed as a chart so you can how your speed changed during the test.
+
+- AUthentication
+    TypeFast also has a basic authentication system.
+    * Create an account
+    * Log in
+    * Show or hide their password
+    * Stay logged in using a JWT token
+    * Store basic user information locally
+    The backend handles authentication and passwords are hashed using bcrypt before being stored in the database.
 
 ## Tech used
-* React (with hooks)
-* Tailwind CSS v4 with custom design tokens
-* Chart.js + react-chartjs-2  for the WPM graph
-* Google Gemini API for story generation 
-* ludide React for icons
+### Frontend
+* React
+* React Router
+* Tailwind CSS v4
+* Chart.js
+* react-chartjs-2 
+* ludide React
 * Vite
+* Axios
+
+### Backend
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* bcryptjs 
+* JSOM Web Token (JWT)
+* CORS
+* dotenv
+
+### API
+* Google Gemini API for AI-generted stories
 
 ## Getting started
 * git clone https://github.com/meAtmuna/typing-speed-tester.git
 * cd typing-speed-tester
 * npm install
 
-You need a Gemini API key for the story mode.
-Create a .env file in the root:
+### Gemini API
+Story mode uses the Google Gemini API.
+
+Create a .env file in the project root:
 
 * VITE_GEMINI_API_KEY = your_api_key_here
 
-You can get a free key at https://aistudio.google.com
-Then start the dev server:
+You can get a Gemini API key from Google AI Studio:https://aistudio.google.com
 
-* npm run dev
+### Backend setup
+Go to the backend folder:
+cd backend
+install the backend dependecies:
+npm install
+
+Create a .env file inside the backend folder:
+PORT=5000
+MONGO_URI=your_mongodb_connection_string JWT_SECRET=your_jwt_secret 
+
+Then start the backend:
+npm run dev
+
+Go back to the main project folder and start the frontend:
+
+npm run dev
+
+The fonrtend will run on the Vite development server and the backend will run on port 5000.
+
 
 ## Screenshot
-![screenshot](src/assets/Screenshot1.png)
-![screenshot](src/assets/Screenshot2.png)
-![screenshot](src/assets/Screenshot3.png)
-![screenshot](src/assets/Screenshot4.png)
-![screenshot](src/assets/Screenshot5.png)
+![screenshot](src/assets/homeSS.png)
+![screenshot](src/assets/signupSS.png)
+![screenshot](src/assets/loginSS.png)
+![screenshot](src/assets/wordsSS.png)
+![screenshot](src/assets/customWordSS.png)
+![screenshot](src/assets/paragraphSS.png)
+![screenshot](src/assets/storySS.png)
+![screenshot](src/assets/aiStorySS.png)
+![screenshot](src/assets/timeSS.png)
+![screenshot](src/assets/hideTime&resumeBtnSS.png)
+![screenshot](src/assets/settingsSS.png)
+![screenshot](src/assets/resultSS.png)
 
 ## Whats coming 
-This project still being worked on. Some feature I plan to add:
-* Custom timer let the user pick 30, 60 or 120 seconds instead of always 60
-* Personal best tracking and leaderboard
-* Option to turn the keyboard sound on/off like Settings Option 
+This project still being worked on. Some feature I want to add:
+* Personal best tracking
+* Leaderboard
+* Better user profiles
+* Saving typing results to the database
+* More typing content
+* More customization options
+* Forgot password functionality
 * Responsive design
-* User authentication (login / signup)
+* Google login
+* More detailed typing statistics
+
+## Why I built this
+
+I wanted to build somethiing where I could practice React and also learn how a frontend connects with a real backend.
+
+while building TypeFast, I worked with React State an hooks, API requests, authentication, MongoDB, JWT, AI APIs and reusable components. 
+
+More features will be added  as I continue working on the project.
+
