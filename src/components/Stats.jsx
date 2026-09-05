@@ -10,13 +10,13 @@ function Stats({ timeLeft, wpm, mistakes, accuracy, hideTimer, testStarted }) {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-card border border-border rounded-xl py-4 text-center"
+              className="text-center"
             >
               <p className="text-xs tracking-widest text-muted-text mb-1">
                 {stat.label}
               </p>
 
-              <p className={`text-3xl font-bold ${stat.color}`}>
+              <p className={`text-2xl font-semibold ${stat.color}`}>
                 {stat.value}
               </p>
             </div>

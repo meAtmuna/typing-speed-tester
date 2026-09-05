@@ -114,8 +114,8 @@ function Signup() {
 
     return (
         <div className="min-h-screen bg-app-bg flex items-center justify-center px-6">
-            <div className="bg-card border border-border rounded-2xl p-8 w-full max-w-md">
-                <h1 className="text-3xl font-bold text-center text-cyan">
+            <div className="bg-card rounded-2xl p-8 w-full max-w-md">
+                <h1 className="text-3xl font-bold text-center text-blue-300">
                     Create Account
                 </h1>
                 <p className="text-secondary-text text-center  mt-2 mb-5">
@@ -142,7 +142,7 @@ function Signup() {
                             placeholder="Enter your name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
+                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                         />
                     </div>
                     <div>
@@ -155,7 +155,7 @@ function Signup() {
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e)=>setEmail(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
+                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                         />
                     </div>
                     <div>
@@ -168,13 +168,13 @@ function Signup() {
                                 placeholder="Create a password"
                                 value={password}
                                 onChange={(e)=> setPassword(e.target.value)}
-                                className="w-full px-4 py-3 pr-12 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
+                                className="w-full px-4 py-3 pr-12 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                             />
 
                             <button 
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-cyan transition cursor-pointer"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-white transition cursor-pointer"
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
                                 {showPassword ? (
@@ -196,14 +196,14 @@ function Signup() {
                                     placeholder="Confirm password"
                                     value={confirmPassword}
                                     onChange={(e)=>setConfirmPassword(e.target.value)}
-                                    className="w-full px-4 py-3 pr-12 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan"
+                                    className="w-full px-4 py-3 pr-12 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white"
                             />
                             <button
                                 type="button"
                                 onClick={() =>
                                     setShowConfirmPassword(!showConfirmPassword)
                                 }
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-cyan transition cursor-pointer"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-white transition cursor-pointer"
                                 aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                             >
                                 {showConfirmPassword ? (
@@ -217,7 +217,7 @@ function Signup() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        className="w-full bg-blue-300 text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                         {loading ? "Creating Account..." : "Create Account"}
                     </button>
@@ -242,7 +242,7 @@ function Signup() {
                     Already have an account
                     <Link 
                         to="/login"
-                        className="text-cyan ml-2 hover:underline"
+                        className="text-blue-300 ml-2 hover:underline"
                     >
                         Login
                     </Link>

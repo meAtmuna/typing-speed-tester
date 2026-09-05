@@ -105,8 +105,8 @@ function Login() {
 
     return (
         <div className="min-h-screen bg-app-bg flex items-center justify-center px-6">
-            <div className="bg-card border border-border rounded-2xl p-8 w-full max-w-md">
-                <h1 className="text-3xl font-bold text-center text-cyan">
+            <div className="bg-card rounded-xl p-8 w-full max-w-md">
+                <h1 className="text-3xl font-bold text-center text-blue-300">
                     Welcome Back
                 </h1>
                 <p className="text-secondary-text text-center mt-2 mb-5">
@@ -132,7 +132,7 @@ function Login() {
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
+                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                         />
                     </div>
                     <div>
@@ -145,13 +145,13 @@ function Login() {
                                 placeholder="Enter your password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-cyan" 
+                                className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                             />
 
                             <button 
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text hover:text-cyan transition cursor-pointer"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text transition cursor-pointer"
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
                                 {showPassword ? (
@@ -172,7 +172,7 @@ function Login() {
                         </label>
                         <button 
                             type="button"
-                            className="text-cyan hover:text-white transition cursor-pointer"
+                            className="text-blue-300 hover:text-white transition cursor-pointer"
                         >
                             Forgot Password
                         </button>
@@ -180,7 +180,7 @@ function Login() {
                     <button
                         type="submit"
                         disabled={loading} 
-                        className="w-full bg-cyan text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        className="w-full bg-blue-300 text-app-bg font-semibold py-3 rounded-xl cursor-pointer transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                         {loading ? "Logging in..." : "Login"}
                     </button>
@@ -205,7 +205,7 @@ function Login() {
                     Don't have an account
                     <Link 
                         to="/signup"
-                        className="text-cyan ml-2 hover:underline"
+                        className="text-blue-300 ml-2 hover:underline"
                     >
                         Sign Up
                     </Link>

@@ -4,15 +4,15 @@ import { Line } from "react-chartjs-2"
 function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, changeHideTimer, cursorStyle, changeCursorStyle}) {
     return (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 backdrop-blur-sm px-4">
-            <div className="bg-card border border-border rounded-2xl w-full max-w-[650px] shadow-2xl overflow-hidden">
+            <div className="bg-card rounded-2xl w-full max-w-[650px] shadow-2xl overflow-hidden">
                 <div className="flex justify-between items-start p-6 border-b border-border">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-cyan/10 flex items-center justify-center">
-                            <Settings2 size={20} className="text-cyan"/>
+                        <div className="w-10 h-10 rounded-md bg-blue-300 flex items-center justify-center">
+                            <Settings2 size={20} className="text-white"/>
                         </div>
 
                         <div>
-                            <h2 className="text-xl font-bold text-primary-text">
+                            <h2 className="text-md font-bold text-primary-text">
                                 Settings
                             </h2>
                             <p className="text-secondary-text text-sm mt-1">
@@ -34,9 +34,9 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                     <div className="flex items-center justify-between gap-4">
 
                         <div className="flex items-center gap-3">
-                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                            <div className={`w-10 h-10 rounded-md flex items-center justify-center transition-all ${
                                 soundEnabled
-                                    ? "bg-cyan/10 text-cyan"
+                                    ? "bg-blue-300 text-white"
                                     : "bg-secondary-text/10 text-secondary-text"
                             }`}
                             >
@@ -65,7 +65,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                             onClick={() => changeSoundEnabled(!soundEnabled)}
                             className={`relative w-12 h-6 rounded-full transition-all cursor-pointer duration-300 ${
                                 soundEnabled
-                                    ? "bg-cyan"
+                                    ? "bg-blue-300"
                                     : "bg-secondary-text/30"
                             }`}
                             aria-label="Toggle typing sound"    
@@ -85,9 +85,9 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
 
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
-                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                            <div className={`w-10 h-10 rounded-md flex items-center justify-center transition-all ${
                                 hideTimer
-                                    ? "bg-cyan/10 text-cyan"
+                                    ? "bg-blue-300 text-white"
                                     : "bg-secondary-text/10 text-secondary-text"
                                 }`}
                             >
@@ -116,7 +116,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                             onClick={() => changeHideTimer(!hideTimer)}
                             className={`relative w-12 h-6 rounded-full transition-all cursor-pointer duration-300 ${
                                 hideTimer
-                                ? "bg-cyan"
+                                ? "bg-blue-300"
                                     : "bg-secondary-text/30"
                                 }`}
                             aria-label="Toggle hide timer"    
@@ -136,7 +136,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
 
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-cyan/10 text-cyan flex items-center justify-center">
+                            <div className="w-10 h-10 rounded-md bg-blue-300 text-white flex items-center justify-center">
                                 <TextCursorIcon size={20}/>
                             </div>
 
@@ -153,7 +153,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
 
                         <div  className="gap-2 p-2 relative flex items-center rounded-full bg-secondary-text/10 overflow-hidden">
                             <div 
-                                className={`w-[92px] absolute top-1.5 bottom-1.5 rounded-full bg-cyan/15 transition-transform duration-300 ease-out ${
+                                className={`w-[92px] absolute top-1.5 bottom-1.5 rounded-full bg-blue-300 transition-transform duration-300 ease-out ${
                                     cursorStyle === "block"
                                         ? "translate-x-0"
                                         : cursorStyle === "underline"
@@ -186,7 +186,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                                         onClick={() => changeCursorStyle(name)}
                                         className={`w-[90px] relative z-10 rounded-full flex items-center justify-center gap-1 py-1 text-sm font-medium transition-colors duration-300 cursor-pointer active:scale-95 ${
                                             active
-                                                ? "text-cyan"
+                                                ? "text-white"
                                                 : "text-secondary-text hover:text-primary-text"
                                         }`}
                                     >

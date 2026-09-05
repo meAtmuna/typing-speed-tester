@@ -12,7 +12,7 @@ function TypingArea({currentText, typedText, cursorStyle}) {
       }
     }, [typedText])
     return (
-         <div className="bg-typing border border-border rounded-2xl p-8 text-3xl leading-relaxed cursor-text">
+         <div className="bg-typing rounded-xl p-8 text-3xl leading-relaxed cursor-text">
             {currentText.split("").map((char, currentIndex) =>{
                 let styles = "text-untyped"
 
@@ -23,20 +23,20 @@ function TypingArea({currentText, typedText, cursorStyle}) {
                     styles = "text-correct"
                   } else {
                     if (char === " ") {
-                        styles = "border-b-4 border-red-500"
+                        styles = "border-b-2 border-red-500"
                     } else {
                         styles = "text-mistake"
                     }
                   }
                 } else if (currentIndex === typedText.length) {
                   if (cursorStyle === "block") {
-                    styles =  "bg-cyan text-app-bg rounded animate-[cursorPulse_1s_step-end_infinite]"
+                    styles =  "bg-primary-text text-app-bg rounded-sm animate-[cursorPulse_1s_step-end_infinite]"
                   }
                   if (cursorStyle === "underline") {
-                    styles =  "text-untyped border-b-4 border-cyan animate-[cursorPulse_1s_step-end_infinite]"
+                    styles =  "text-untyped border-b-2 border-primary-text animate-[cursorPulse_1s_step-end_infinite]"
                   }
                   if (cursorStyle === "bar") {
-                    styles =  "text-untyped border-l-4 border-cyan animate-[cursorPulse_1s_step-end_infinite]"
+                    styles =  "text-untyped border-l-2 border-primary-text animate-[cursorPulse_1s_step-end_infinite]"
                   }
                 }
 

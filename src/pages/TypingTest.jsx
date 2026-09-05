@@ -301,7 +301,7 @@ function TypingTest() {
   }
 
   return (
-    <div className="min-h-screen bg-app-bg text-primary-text flex items-center justify-center px-6 py-10"
+    <div className="min-h-screen bg-black/85 text-primary-text flex items-center justify-center px-6 py-10"
       onClick={() => {
         if (testStarted && !testEnded && !isPaused) {
           inputRef.current?.focus()
@@ -322,7 +322,7 @@ function TypingTest() {
           </button>
         </div>
         
-        <div className="bg-card border border-border rounded-xl p-3 mb-8 flex justify-between items-center gap-6">
+        <div className="mb-13 flex justify-between items-center gap-6">
           <ContentSelector 
             activeSelector={activeSelector} 
             changeActiveSelector={changeActiveSelector}

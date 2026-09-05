@@ -9,15 +9,15 @@ function ContentSelector({activeSelector, changeActiveSelector}) {
                 return (
                     <button 
                         key={tab}
-                        className={` relative font-medium px-5 py-2 rounded-lg capitalize transition-all cursor-pointer duration-200 active:scale-95 ${
+                        className={`relative px-4 py-2 text-sm font-medium rounded-md capitalize transition-al l cursor-pointer duration-200 active:scale-95 ${
                             active
-                                ? "text-cyan"
+                                ? "bg-white/10 text-primary-text"
                                 : "text-secondary-text hover:text-primary-text hover:bg-white/5"
                         }`}
                         onClick={() => changeActiveSelector(tab)}
                     >
                         {active && (
-                            <span className="absolute inset-0 rounded-lg bg-cyan/10 border border-cyan/30 animate-[fadeIn_0.15s_ease-out]"></span>
+                            <span className="absolute inset-0 rounded-lg bg-white/5 border animate-[fadeIn_0.15s_ease-out]"></span>
                         )}
                         <span className="relative z-10">{tab}</span>
                     </button>
