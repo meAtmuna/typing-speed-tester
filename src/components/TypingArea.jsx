@@ -12,15 +12,15 @@ function TypingArea({currentText, typedText, cursorStyle}) {
       }
     }, [typedText])
     return (
-         <div className="bg-typing rounded-xl p-8 text-3xl leading-relaxed cursor-text">
+         <div className="p-8 text-3xl leading-relaxed cursor-text">
             {currentText.split("").map((char, currentIndex) =>{
-                let styles = "text-untyped"
+                let styles = "text-white/60"
 
                 if (currentIndex < typedText.length) {
                   const isCorrect = typedText[currentIndex] === char
                    
                   if (isCorrect) {
-                    styles = "text-correct"
+                    styles = "text-blue-300 "
                   } else {
                     if (char === " ") {
                         styles = "border-b-2 border-red-500"

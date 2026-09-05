@@ -43,7 +43,7 @@ function Hero() {
     return (
         <section className="grid lg:grid-cols-2 items-center gap-16 py-24">
             <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-300 text-white border border-blue-300 mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-300 text-white mb-6">
                     <Zap size={14} />
                     <span className="text-white text-sm font-semibold uppercase tracking-wide">Improve Faster</span>
                 </div>
@@ -140,11 +140,11 @@ function Hero() {
                         </p>
                     </div>
                 </div>
-                <div className="bg-typing rounded-xl p-6 text-xl leading-10 font-mono min-h-[130px]">
+                <div className="p-6 text-xl leading-10 font-mono min-h-[130px]">
                     {previewText.split("").map((char, index) => {
-                        let className =  "text-untyped"
+                        let className =  "text-white"
                         if (index < typedCount) {
-                            className =  "text-correct"
+                            className =  "text-blue-300"
                         }
                         else if (index === typedCount) {
                             className = "bg-primary-text text-app-bg rounded animate-pulse"

@@ -40,8 +40,8 @@ function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLimit}
       }
     }
     return(
-        <div className="h-screen bg-app-bg flex items-center justify-center px-6 py-4 overflow-hidden">
-          <div className="bg-card p-7 rounded-3xl w-full max-w-4xl">
+        <div className="h-screen bg-card flex items-center justify-center px-6 py-4 overflow-hidden">
+          <div className="bg-app-bg p-7 rounded-3xl w-full max-w-4xl">
 
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-0.5 px-4 py-1 rounded-full bg-blue-300 text-white text-sm mb-4">

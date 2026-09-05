@@ -136,18 +136,13 @@ The fonrtend will run on the Vite development server and the backend will run on
 
 
 ## Screenshot
-![screenshot](src/assets/homeSS.png)
-![screenshot](src/assets/signupSS.png)
-![screenshot](src/assets/loginSS.png)
-![screenshot](src/assets/wordsSS.png)
-![screenshot](src/assets/customWordSS.png)
-![screenshot](src/assets/paragraphSS.png)
-![screenshot](src/assets/storySS.png)
-![screenshot](src/assets/aiStorySS.png)
-![screenshot](src/assets/timeSS.png)
-![screenshot](src/assets/hideTime&resumeBtnSS.png)
-![screenshot](src/assets/settingsSS.png)
-![screenshot](src/assets/resultSS.png)
+![screenshot](src/assets/HomeScreenshot.png)
+![screenshot](src/assets/SignupScreenshot.png)
+![screenshot](src/assets/LoginScreenshot.png)
+![screenshot](src/assets/TypingAreaScreenshot.png)
+![screenshot](src/assets/CustomScreenshot.png)
+![screenshot](src/assets/SettingsScreenshot.png)
+![screenshot](src/assets/ResultScreenshot.png)
 
 ## Whats coming 
 This project still being worked on. Some feature I want to add:

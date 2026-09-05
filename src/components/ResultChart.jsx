@@ -17,8 +17,8 @@ function ResultChart({wpmHistory}) {
         datasets: [
             {
                 data: wpmHistory,
-                borderColor: "#00d4ff",
-                backgroundColor: "rgba(0, 212, 255, 0.15)",
+                borderColor: "#93c5fd",
+                backgroundColor: "rgba(147, 197, 253, 0.15)",
                 tension: 0.4,
                 fill: true, 
                 pointRadius: 3,
@@ -37,7 +37,7 @@ function ResultChart({wpmHistory}) {
             },
             tooltip: {
                 backgroundColor: "#131825",
-                borderColor: "#00d4ff",
+                borderColor: "#93c5fd",
                 borderWidth: 1,
                 padding: 12,
                 displayColors: false,

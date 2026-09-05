@@ -113,8 +113,8 @@ function Signup() {
     }
 
     return (
-        <div className="min-h-screen bg-app-bg flex items-center justify-center px-6">
-            <div className="bg-card rounded-2xl p-8 w-full max-w-md">
+        <div className="min-h-screen bg-card flex items-center justify-center px-6">
+            <div className="bg-app-bg rounded-2xl p-8 w-full max-w-md">
                 <h1 className="text-3xl font-bold text-center text-blue-300">
                     Create Account
                 </h1>

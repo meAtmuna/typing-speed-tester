@@ -301,7 +301,7 @@ function TypingTest() {
   }
 
   return (
-    <div className="min-h-screen bg-black/85 text-primary-text flex items-center justify-center px-6 py-10"
+    <div className="min-h-screen bg-card text-primary-text flex items-center justify-center px-6 py-10"
       onClick={() => {
         if (testStarted && !testEnded && !isPaused) {
           inputRef.current?.focus()
@@ -311,13 +311,13 @@ function TypingTest() {
       <div className="max-w-5xl w-full">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold flex items-center gap-2.5">
-            <i className="fa-solid fa-keyboard text-cyan"></i>
-            Type<span className="text-cyan">Fast</span>
+            <i className="fa-solid fa-keyboard text-blue-300"></i>
+            Type<span className="text-blue-300">Fast</span>
           </h1>
 
           <button
             onClick={() => setShowSettings(true)}
-            className="p-2 text-secondary-text hover:text-cyan hover:bg-cyan/10 rounded-lg transition-all cursor-pointer duration-200 hover:rotate-12 hover:scale-105 active:scale-95">
+            className="p-2 text-secondary-text hover:text-white hover:bg-blue-300 rounded-lg transition-all cursor-pointer duration-200 hover:rotate-12 hover:scale-105 active:scale-95">
             <SettingsIcon size={22}/>
           </button>
         </div>
@@ -376,7 +376,7 @@ function TypingTest() {
         <div className="flex justify-center mb-6">
           {!testStarted ? (
             <button
-              className="px-8 py-3 bg-cyan text-app-bg font-semibold rounded-xl cursor-pointer transition-all duration-200 ease-out hover:scale-105 hover:shadow-[0_0_20px_rgba(0,212,255,0.25)] active:scale-95" 
+              className="px-8 py-3 bg-blue-300 text-app-bg font-semibold rounded-xl cursor-pointer transition-all duration-200 ease-out hover:scale-105 active:scale-95" 
               onClick={() => {
                 setTestStarted(true)
                 setIsPaused(false)
@@ -389,8 +389,8 @@ function TypingTest() {
             <button 
               className={`px-8 py-3 font-semibold rounded-xl cursor-pointer transition-all duration-200 ease-out hover:scale-105 active:scale-95 ${ 
                 isPaused
-                  ? "bg-wpm text-app-bg hover:shadow-[0_0_20px_rgba(52,211,153,0.25)]"
-                  : "bg-cyan text-app-bg hover:shadow-[0_0_20px_rgba(0,212,255,0.25)]"
+                  ? "bg-blue-700 text-app-bg"
+                  : "bg-blue-300 text-app-bg"
               }`}
               onClick={() => {
                 setIsPaused(!isPaused)
@@ -425,8 +425,8 @@ function TypingTest() {
       </div>
 
       {showCustomModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-card border border-border rounded-2xl p-6 w-[420px]">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <div className="bg-card rounded-xl p-6 w-[420px]">
             <h2 className="text-xl font-bold mb-2">Custom Word Count</h2>
             <p className="text-secondary-text mb-4">
               Enter number of words
@@ -446,20 +446,20 @@ function TypingTest() {
                 className={`w-full px-4 py-3 rounded-lg outline-none border mb-4 ${
                   customWords.trim() === ""
                     ? "border-red-500 bg-typing-box" 
-                    : "border-border bg-typing-box focus:border-cyan" 
+                    : "border-border bg-typing-box focus:border-blue-300" 
                 } text-primary-text`}
               />
 
               <div className="flex gap-3 justify-end"> 
                 <button 
-                  className="px-4 py-2 rounded-lg text-secondary-text border border-cyan cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-secondary-text border border-blue-300 cursor-pointer"
                   onClick={() => setShowCustomModal(false)}
                 >
                   Cancel
                 </button>
 
                 <button
-                  className="px-4 py-2 rounded-lg bg-cyan text-app-bg font-semibold cursor-pointer"
+                  className="px-4 py-2 rounded-lg bg-blue-300 text-app-bg font-semibold cursor-pointer"
                   onClick={() => {
                     applyCustomWords()
                     setShowCustomModal(false)
@@ -473,8 +473,8 @@ function TypingTest() {
       )}
 
       {showCustomTimeModal &&  (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-card border border-border rounded-2xl p-6 w-[420px]">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <div className="bg-card rounded-xl p-6 w-[420px]">
             <h2 className="text-xl font-bold mb-2">Custom Time</h2>
             <p className="text-secondary-text mb-4">
               Enter time in seconds
@@ -494,20 +494,20 @@ function TypingTest() {
                 className={`w-full px-4 py-3 rounded-lg outline-none border mb-4 ${
                   customTime.trim() === ""
                     ? "border-red-500 bg-typing-box" 
-                    : "border-border bg-typing-box focus:border-cyan" 
+                    : "border-border bg-typing-box focus:border-blue-300" 
                 } text-primary-text`}
               />
 
               <div className="flex gap-3 justify-end"> 
                 <button 
-                  className="px-4 py-2 rounded-lg text-secondary-text border border-cyan cursor-pointer"
+                  className="px-4 py-2 rounded-lg text-secondary-text border border-blue-300 cursor-pointer"
                   onClick={() => setShowCustomTimeModal(false)}
                 >
                   Cancel
                 </button>
 
                 <button
-                  className="px-4 py-2 rounded-lg bg-cyan text-app-bg font-semibold cursor-pointer"
+                  className="px-4 py-2 rounded-lg bg-blue-300 text-app-bg font-semibold cursor-pointer"
                   onClick={() => {
                     applyCustomTime()
                     setShowCustomTimeModal(false)
@@ -522,8 +522,8 @@ function TypingTest() {
       )}
 
       {showAiModal && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-card border border-border rounded-2xl p-6 w[420px]">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <div className="bg-card rounded-xl p-6 w[420px]">
             <h2 className="text-xl font-bold mb-2">AI Story</h2>
             <p className="text-secondary-text mb-5">
               Select a Story type
@@ -536,8 +536,8 @@ function TypingTest() {
                   onClick={() => setSelectedAiStoryType(type)}
                   className={`py-2  rounded-lg capitalize border transition-all px-4 cursor-pointer ${
                     selectedAiStoryType === type
-                      ? "bg-cyan/15 text-cyan"
-                      : "text-secondary-text hover:text-cyan hover:bg-cyan/10"
+                      ? "bg-blue-300 text-white"
+                      : "text-secondary-text hover:text-white hover:bg-blue-300"
                   }`}
                 >
                   {type}
@@ -547,13 +547,13 @@ function TypingTest() {
 
             <div className="flex justify-end gap-3">
               <button 
-                className="px-4 py-2 rounded-lg text-secondary-text border border-cyan cursor-pointer"
+                className="px-4 py-2 rounded-lg text-secondary-text border border-blue-300 cursor-pointer"
                 onClick={() => setShowAiModal(false)}
               >
                 Cancel
               </button>
               <button
-                className="px-4 py-2 rounded-lg bg-cyan text-app-bg font-semibold disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 rounded-lg bg-blue-300 text-app-bg font-semibold disabled:opacity-50 cursor-pointer"
                 onClick={generateAiStory}
                 disabled={loadingStory}
               >
