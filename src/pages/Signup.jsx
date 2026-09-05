@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import axios from "axios"
 import { Eye, EyeOff } from "lucide-react"
 
@@ -13,6 +13,69 @@ function Signup() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [loading, setLoading] = useState(false)
+    const googleButtonRef = useRef(null)
+    
+    useEffect(() => {
+        const  renderGoogleButton = () => {
+            if (!window.google || !googleButtonRef.current) return
+
+            window.google.accounts.id.initialize({
+                client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+
+                callback: async (response) => {
+                    try {
+                        setLoading(true)
+                        setErrorMessage("")
+
+                        const res = await axios.post(
+                            "http://localhost:5000/api/auth/google",
+                            {
+                                credential: response.credential
+                            }
+                        )
+
+                        localStorage.setItem("token", res.data.token)
+                        localStorage.setItem(
+                            "user",
+                            JSON.stringify(res.data.user)
+                        )
+
+                        navigate("/typing-test")
+                    } catch (error) {
+                        setErrorMessage(
+                            error.response?.data?.message || "Google login failed"
+                        )
+                    } finally {
+                        setLoading(false)
+                    }
+                }
+            })
+
+            window.google.accounts.id.renderButton(
+                googleButtonRef.current,
+                {
+                    theme: "outline",
+                    size: "large",
+                    text: "continue_with",
+                    shape: "rectangular",
+                    width: 400
+                }
+            )
+        }
+
+        if (window.google) {
+            renderGoogleButton()
+        } else {
+            const interval = setInterval(() => {
+                if (window.google) {
+                    clearInterval(interval)
+                    renderGoogleButton()
+                }
+            },  100)
+
+            return ()=> clearInterval(interval)
+        }
+    } , [navigate])
 
     const handleSignup = async (e) => {
         e.preventDefault()
@@ -167,10 +230,14 @@ function Signup() {
                     </span>
                     <div className="flex-1 h-px bg-border"></div>
                 </div>
-                <button className="w-full border-border bg-transparent py-3 rounded-xl text-primary-text hover:border-cyan hover:bg-cyan/10 transition-all cursor-pointer flex items-center justify-center gap-3">
+                <div
+                    ref={googleButtonRef}
+                    className="w-full flex justify-center"
+                />
+                {/* <button className="w-full border-border bg-transparent py-3 rounded-xl text-primary-text hover:border-cyan hover:bg-cyan/10 transition-all cursor-pointer flex items-center justify-center gap-3">
                     <i className="fa-brands fa-google text-lg text-cyan"></i>
                     Continue with Google
-                </button>
+                </button> */}
                 <p className="text-center mt-8 text-secondary-text">
                     Already have an account
                     <Link 

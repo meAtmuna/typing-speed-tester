@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { OAuth2Client } from "google-auth-library"
 
 export async function signup(req, res) {
     try {
@@ -80,6 +81,75 @@ export async function login(req, res) {
     } catch (error) {
         res.status(500).json({
             message: error.message,
+        })
+    }
+}
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+
+export async function googleLogin(req, res) {
+    try {
+        const { credential } = req.body
+
+        if (!credential) {
+            return res.status(400).json({
+                message: "Google credential is required",
+            })
+        }
+
+        const ticket = await googleClient.verifyIdToken({
+            idToken: credential,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        })
+
+        const payload = ticket.getPayload()
+
+        const googleId= payload.sub
+        const email = payload.email
+        const name = payload.name
+ 
+        if (!email) {
+            return res.status(400).json({
+                message: "Google account email not available",
+            })
+        }
+
+        let user = await User.findOne({email})
+
+        if (!user) {
+            user = await User.create({
+                name,
+                email,
+                googleId,
+            })
+        } else if (!user.googleId) {
+            user.googleId = googleId
+            await user.save()
+        }
+
+        const token = jwt.sign(
+            {
+                id: user._id,
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "7d",
+            }
+        )
+
+        res.status(200).json({
+            message: "Google login successful",
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+            },
+        })
+    } catch (error) {
+        console.error("Google login error:", error);
+        res.status(401).json({
+            message: "Google authentication failed"
         })
     }
 }
