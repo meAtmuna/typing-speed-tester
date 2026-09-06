@@ -28,7 +28,7 @@ function Signup() {
                         setErrorMessage("")
 
                         const res = await axios.post(
-                            "http://localhost:5000/api/auth/google",
+                            `${import.meta.env.VITE_API_URL}/api/auth/google`,
                             {
                                 credential: response.credential
                             }
@@ -91,7 +91,7 @@ function Signup() {
 
         try {
             const res = await axios.post(
-                "http://localhost:5000/api/auth/signup",
+                `${import.meta.env.VITE_API_URL}/api/auth/signup`,
                 {
                     name,
                     email,
