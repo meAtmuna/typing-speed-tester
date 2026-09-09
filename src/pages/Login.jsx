@@ -105,13 +105,15 @@ function Login() {
 
     return (
         <div className="min-h-screen bg-card flex items-center justify-center px-6">
-            <div className="bg-app-bg rounded-xl p-8 w-full max-w-md">
-                <h1 className="text-3xl font-bold text-center text-blue-300">
-                    Welcome Back
-                </h1>
-                <p className="text-secondary-text text-center mt-2 mb-5">
-                    Login to continue your typing journey
-                </p>
+            <div className="w-full max-w-md">
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-bold text-blue-300 tracking-tight">
+                        Welcome Back
+                    </h1>
+                    <p className="text-secondary-text text-center mt-3 text-sm">
+                        Login to continue your typing journey
+                    </p>
+                </div>
 
                 <form
                     onSubmit={handleLogin} 
@@ -123,7 +125,7 @@ function Login() {
                         </p>
                     )}
                     <div>
-                        <label className="block mb-2 text-primary-text font-medium">
+                        <label className="block mb-3 text-primary-text font-medium text-sm">
                             Email
                         </label>
 
@@ -132,11 +134,11 @@ function Login() {
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
+                            className="w-full px-0 py-3 rounded-none bg-transparent border-0 border-b border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                         />
                     </div>
                     <div>
-                        <label className="block mb-2 text-primary-text font-medium">
+                        <label className="block mb-3 text-primary-text font-medium text-sm">
                             Password
                         </label>
                         <div className="relative">
@@ -145,13 +147,13 @@ function Login() {
                                 placeholder="Enter your password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
+                                className="w-full px-0 py-3 rounded-none bg-transparent border-0 border-b border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                             />
 
                             <button 
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-text transition cursor-pointer"
+                                className="absolute right-0 top-1/2 -translate-y-1/2 text-secondary-text transition cursor-pointer"
                                 aria-label={showPassword ? "Hide password" : "Show password"}
                             >
                                 {showPassword ? (
@@ -162,11 +164,11 @@ function Login() {
                             </button>
                         </div>
                     </div>
-                    <div className="flex justify-between items-center text-sm">
-                        <label className="flex items-center gap-2 text-primary-text cursor-pointer">
+                    <div className="flex justify-between items-center pt-1">
+                        <label className="flex items-center gap-2 text-secondary-text text-sm cursor-pointer">
                             <input 
                                 type="checkbox"
-                                className="accent-cyan w-4 h-4"
+                                className="text-blue-300 w-4 h-4 cursor-pointer"
                             />
                             Remember me
                         </label>

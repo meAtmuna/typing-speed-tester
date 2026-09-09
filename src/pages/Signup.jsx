@@ -114,13 +114,15 @@ function Signup() {
 
     return (
         <div className="min-h-screen bg-card flex items-center justify-center px-6">
-            <div className="bg-app-bg rounded-2xl p-8 w-full max-w-md">
-                <h1 className="text-3xl font-bold text-center text-blue-300">
-                    Create Account
-                </h1>
-                <p className="text-secondary-text text-center  mt-2 mb-5">
-                    Join TypeFast and start improving your typing today
-                </p>
+            <div className="w-full max-w-md">
+                <div className="text-center mb-12">
+                    <h1 className="text-3xl font-bold text-center text-blue-300">
+                        Create Account
+                    </h1>
+                    <p className="text-secondary-text text-center  mt-2 mb-5">
+                        Join TypeFast and start improving your typing today
+                    </p>
+                </div>
 
                 <form
                     onSubmit={handleSignup} 
@@ -133,7 +135,7 @@ function Signup() {
                     )}
 
                     <div>
-                        <label className="block mb-2 text-primary-text font-medium">
+                        <label className="block mb-3 text-primary-text font-medium text-sm">
                             Full Name
                         </label>
 
@@ -142,11 +144,11 @@ function Signup() {
                             placeholder="Enter your name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
+                            className="w-full px-0 py-3 rounded-none bg-transparent border-0 border-b border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                         />
                     </div>
                     <div>
-                        <label className="block mb-2 text-primary-text font-medium">
+                        <label className="block mb-3 text-primary-text font-medium text-sm">
                             Email
                         </label>
 
@@ -155,11 +157,11 @@ function Signup() {
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e)=>setEmail(e.target.value)}
-                            className="w-full px-4 py-3 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
+                            className="w-full px-0 py-3 rounded-none bg-transparent border-0 border-b border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
                         />
                     </div>
                     <div>
-                        <label className="block mb-2 text-primary-text font-medium">
+                        <label className="block mb-3 text-primary-text font-mediumt text-sm">
                             Password
                         </label>
                         <div className="relative">
@@ -168,9 +170,8 @@ function Signup() {
                                 placeholder="Create a password"
                                 value={password}
                                 onChange={(e)=> setPassword(e.target.value)}
-                                className="w-full px-4 py-3 pr-12 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white" 
+                                className="w-full px-0 py-3 rounded-none bg-transparent border-0 border-b border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white"
                             />
-
                             <button 
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
@@ -186,7 +187,7 @@ function Signup() {
                         </div>
                     </div>
                     <div>
-                        <label className="block mb-2 text-primary-text font-medium">
+                        <label className="block mb-3 text-primary-text font-medium text-sm">
                             Confirm Password
                         </label>
 
@@ -196,7 +197,7 @@ function Signup() {
                                     placeholder="Confirm password"
                                     value={confirmPassword}
                                     onChange={(e)=>setConfirmPassword(e.target.value)}
-                                    className="w-full px-4 py-3 pr-12 rounded-xl bg-typing border border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white"
+                                    className="w-full px-0 py-3 rounded-none bg-transparent border-0 border-b border-border text-primary-text placeholder:text-muted-text outline-none transition-all focus:border-white"
                             />
                             <button
                                 type="button"

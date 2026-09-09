@@ -24,8 +24,6 @@ function Hero() {
                 return
             }
             
-            const currentChar = previewText[pos]
-            
             const delay = previewText[pos] === " "
             ? 220
             : 90 + Math.random() * 80
@@ -41,44 +39,108 @@ function Hero() {
     }, [])
 
     return (
-        <section className="grid lg:grid-cols-2 items-center gap-16 py-24">
-            <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-300 text-white mb-6">
-                    <Zap size={14} />
-                    <span className="text-white text-sm font-semibold uppercase tracking-wide">Improve Faster</span>
+        <section className="py-20">
+            <div className="grid lg:grid-cols-2 items-center">
+                <div className="lg:pr-16">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-300 text-white mb-6">
+                        <Zap size={14} />
+                        <span className="text-white text-sm font-semibold uppercase tracking-wide">Improve Faster</span>
+                    </div>
+
+                    <h1 className="text-6xl font-bold leading-[1.1]">
+                        Improve Your
+                        <br />
+                        <span className="text-blue-300">Typing Skills</span>
+                    </h1>
+
+                    <p className="text-secondary-text text-lg mt-6 leading-8 max-w-xl">
+                        Practice with random words, paragraphs,
+                        local stories and AI-generated stories while
+                        tracking your speed, accuracy and mistakes.
+                    </p>
+
+                    <div className="flex gap-4 mt-10">
+                        <Link 
+                            to="/typing-test"
+                            className="bg-blue-300 text-app-bg px-8 py-4 rounded-xl font-semibold transition-all hover:-translate-y-1 duration-300 shadow-lg"
+                        >
+                            Start Typing
+                        </Link>
+                        <a
+                            href="https://github.com/meAtmuna/typing-speed-tester"
+                            target="_blank"
+                            rel="noopener noreferrer" 
+                            className="border border-border px-8 py-4 rounded-xl hover:border-blue-300 transition-all cursor-pointer flex items-center gap-2"
+                        >
+                            <i className="fa-brands fa-github"></i>
+                            GitHub
+                        </a>
+                    </div>
                 </div>
 
-                <h1 className="text-6xl font-bold leading-[1.1]">
-                    Improve Your
-                    <br />
-                    <span className="text-blue-300">Typing Skills</span>
-                </h1>
+                <div className="lg:pl-16 lg:border-l-4 lg:border-white">
+                    <div className="flex justify-between items-center mb-6">
+                        <p className="text-secondary-text uppercase tracking-widest text-xs">
+                            Live Preview
+                        </p>
 
-                <p className="text-secondary-text text-lg mt-6 leading-8 max-w-xl">
-                    Practice with random words, paragraphs,
-                    local stories and AI-generated stories while
-                    tracking your speed, accuracy and mistakes.
-                </p>
+                        <div className="flex gap-2">
+                            <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4 mb-10 mt-12">
+                        <div className="text-center">
+                            <p className="text-wpm text-2xl font-bold font-mono">
+                                {previewWPM}
+                            </p>
+                            <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
+                                WPM
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <p className="text-accuracy text-2xl font-bold font-mono">
+                                100%
+                            </p>
+                            <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
+                                Accuracy
+                            </p>
+                        </div>
+                        <div className="text-center">
+                            <p className="text-cyan text-2xl font-bold font-mono">
+                                AI
+                            </p>
+                            <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
+                                Stories
+                            </p>
+                        </div>
+                    </div>
+                    <div className="p-6 text-xl leading-10 font-mono min-h-[130px]">
+                        {previewText.split("").map((char, index) => {
+                            let className =  "text-white"
+                            if (index < typedCount) {
+                                className =  "text-blue-300"
+                            }
+                            else if (index === typedCount) {
+                                className = "bg-primary-text text-app-bg rounded animate-pulse"
+                            }
 
-                <div className="flex gap-4 mt-10">
-                    <Link 
-                        to="/typing-test"
-                        className="bg-blue-300 text-app-bg px-8 py-4 rounded-xl font-semibold transition-all hover:-translate-y-1 duration-300 shadow-lg"
-                    >
-                        Start Typing
-                    </Link>
-                    <a
-                        href="https://github.com/meAtmuna/typing-speed-tester"
-                        target="blank"
-                        rel="noopener noreferrer" 
-                        className="border border-border px-8 py-4 rounded-xl hover:border-blue-300 transition-all cursor-pointer flex items-center gap-2"
-                    >
-                        <i className="fa-brands fa-github"></i>
-                        GitHub
-                    </a>
+                            return (
+                                <span 
+                                    key={index}
+                                    className={className}
+                                >
+                                    {char}
+                                </span>
+                            )
+                        })}
+                    </div>
                 </div>
-
-                <div className="flex gap-10 mt-12">
+            </div>
+            
+            <div className="border-t-4 border-white mt-28 pt-8">
+                <div className="flex justify-center gap-10">
                     <div className="flex items-center gap-2">
                         <i className="fa-solid fa-check text-green-400"></i>
                         <span className="text-secondary-text">
@@ -99,66 +161,6 @@ function Hero() {
                             AI Stories
                         </span>
                     </div>
-                </div>
-            </div>
-
-            <div>
-                <div className="flex justify-between items-center mb-6">
-                    <p className="text-secondary-text uppercase tracking-widest text-xs">
-                        Live Preview
-                    </p>
-
-                    <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                    </div>
-                </div>
-                <div className="grid grid-cols-3 gap-4 mb-10 mt-12">
-                    <div className="text-center">
-                        <p className="text-wpm text-2xl font-bold font-mono">
-                            {previewWPM}
-                        </p>
-                        <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
-                            WPM
-                        </p>
-                    </div>
-                    <div className="text-center">
-                        <p className="text-accuracy text-2xl font-bold font-mono">
-                            100%
-                        </p>
-                        <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
-                            Accuracy
-                        </p>
-                    </div>
-                    <div className="text-center">
-                        <p className="text-cyan text-2xl font-bold font-mono">
-                            AI
-                        </p>
-                        <p className="text-muted-text text-xs uppercase tracking-wider mt-1">
-                            Stories
-                        </p>
-                    </div>
-                </div>
-                <div className="p-6 text-xl leading-10 font-mono min-h-[130px]">
-                    {previewText.split("").map((char, index) => {
-                        let className =  "text-white"
-                        if (index < typedCount) {
-                            className =  "text-blue-300"
-                        }
-                        else if (index === typedCount) {
-                            className = "bg-primary-text text-app-bg rounded animate-pulse"
-                        }
-
-                        return (
-                            <span 
-                                key={index}
-                                className={className}
-                            >
-                                {char}
-                            </span>
-                        )
-                    })}
                 </div>
             </div>
         </section>
