@@ -6,7 +6,7 @@ function Stats({ timeLeft, wpm, mistakes, accuracy, hideTimer, testStarted }) {
     { label: "MISTAKES" , value: mistakes , color: "text-mistake"},
   ]
     return (
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-4 divide-x divide-white border-b border-white py-4 mb-6">
           {stats.map((stat) => (
             <div
               key={stat.label}

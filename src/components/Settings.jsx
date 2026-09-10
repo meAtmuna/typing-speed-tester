@@ -3,9 +3,8 @@ import { Line } from "react-chartjs-2"
 
 function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, changeHideTimer, cursorStyle, changeCursorStyle}) {
     return (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 backdrop-blur-sm px-4">
-            <div className="bg-card rounded-2xl w-full max-w-[650px] shadow-2xl overflow-hidden">
-                <div className="flex justify-between items-start p-6 border-b border-border">
+            <div className="fixed inset-0 z-50 bg-black text-primary-text px-8 py-10 overflow-hidden">
+                <div className="flex justify-between items-center pb-6 border-b-2 border-white">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-md bg-blue-300 flex items-center justify-center">
                             <Settings2 size={20} className="text-white"/>
@@ -30,7 +29,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                     </button>
                 </div>
 
-                <div className="p-6">
+                <div className="max-w-6xl mx-auto py-10">
                     <div className="flex items-center justify-between gap-4">
 
                         <div className="flex items-center gap-3">
@@ -63,25 +62,17 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
 
                         <button 
                             onClick={() => changeSoundEnabled(!soundEnabled)}
-                            className={`relative w-12 h-6 rounded-full transition-all cursor-pointer duration-300 ${
+                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors cursor-pointer ${
                                 soundEnabled
-                                    ? "bg-blue-300"
-                                    : "bg-secondary-text/30"
-                            }`}
-                            aria-label="Toggle typing sound"    
+                                    ? "bg-blue-300 text-white"
+                                    : "bg-secondary-text/10 text-secondary-text hover:bg-secondary-text/20"
+                            }`}    
                         >
-                            <div
-                                className={` absolute top-1 w-4 h-4 bg-white rounded-full transition-all shadow-md duration-300 ${
-                                    soundEnabled
-                                        ? "translate-x-7"
-                                        : "translate-x-1"
-                                }`}
-                            >
-                            </div>
+                            {soundEnabled ? "ON" : "OFF"}
                         </button>
                     </div>
                 
-                    <div className="border-t border-border my-5"></div>
+                    <div className="border-t border-white my-5"></div>
 
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
@@ -114,25 +105,17 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
 
                         <button 
                             onClick={() => changeHideTimer(!hideTimer)}
-                            className={`relative w-12 h-6 rounded-full transition-all cursor-pointer duration-300 ${
+                            className={`px-4 py-1.5 rounded-md text-sm font-medium cursor-pointer transition-colors ${
                                 hideTimer
-                                ? "bg-blue-300"
-                                    : "bg-secondary-text/30"
+                                ? "bg-blue-300 text-white"
+                                    : "bg-secondary-text/10 text-secondary-text hover:bg-secondary-text/20"
                                 }`}
-                            aria-label="Toggle hide timer"    
                             >
-                            <div
-                                className={` absolute top-1 w-4 h-4 bg-white rounded-full transition-all shadow-md duration-300 ${
-                                    hideTimer
-                                    ? "translate-x-7"
-                                    : "translate-x-1"
-                                }`}
-                                >
-                            </div>
+                                {hideTimer ? "ON" : "OFF"}
                         </button>
                     </div>
 
-                    <div className="border-t border-border my-5"></div>
+                    <div className="border-t border-white my-5"></div>
 
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
@@ -151,9 +134,9 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                             </div>
                         </div>
 
-                        <div  className="gap-2 p-2 relative flex items-center rounded-full bg-secondary-text/10 overflow-hidden">
+                        <div  className="gap-1 p-1 relative flex items-center rounded-lg bg-secondary-text/10 overflow-hidden">
                             <div 
-                                className={`w-[92px] absolute top-1.5 bottom-1.5 rounded-full bg-blue-300 transition-transform duration-300 ease-out ${
+                                className={`w-[92px] absolute top-1 bottom-1 rounded-md bg-blue-300 transition-transform duration-200 ease-out ${
                                     cursorStyle === "block"
                                         ? "translate-x-0"
                                         : cursorStyle === "underline"
@@ -184,7 +167,7 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                                     <button
                                         key={name}
                                         onClick={() => changeCursorStyle(name)}
-                                        className={`w-[90px] relative z-10 rounded-full flex items-center justify-center gap-1 py-1 text-sm font-medium transition-colors duration-300 cursor-pointer active:scale-95 ${
+                                        className={`w-[90px] relative z-10 rounded-md flex items-center justify-center gap-2 py-1.5 text-sm font-medium transition-colors duration-200 cursor-pointer ${
                                             active
                                                 ? "text-white"
                                                 : "text-secondary-text hover:text-primary-text"
@@ -201,13 +184,12 @@ function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, c
                     </div>
                 </div>
 
-                <div className="px-6 py-4 border-t border-border bg-black/5">
+                <div className="px-6 py-3 border-t-2 border-white">
                     <p className="text-xs text-secondary-text">
                         Your settings are saved automatically.
                     </p>
                 </div>
             </div>
-        </div>
     )
 }
 

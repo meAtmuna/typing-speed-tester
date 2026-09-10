@@ -78,7 +78,7 @@ function Hero() {
                     </div>
                 </div>
 
-                <div className="lg:pl-16 lg:border-l-4 lg:border-white">
+                <div className="lg:pl-16 lg:border-l-2 lg:border-white">
                     <div className="flex justify-between items-center mb-6">
                         <p className="text-secondary-text uppercase tracking-widest text-xs">
                             Live Preview
@@ -139,7 +139,7 @@ function Hero() {
                 </div>
             </div>
             
-            <div className="border-t-4 border-white mt-28 pt-8">
+            <div className="border-t-2 border-white mt-28 pt-8">
                 <div className="flex justify-center gap-10">
                     <div className="flex items-center gap-2">
                         <i className="fa-solid fa-check text-green-400"></i>

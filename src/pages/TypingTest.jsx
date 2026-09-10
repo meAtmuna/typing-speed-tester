@@ -301,15 +301,15 @@ function TypingTest() {
   }
 
   return (
-    <div className="min-h-screen bg-card text-primary-text flex items-center justify-center px-6 py-10"
+    <div className="min-h-screen bg-black text-primary-text flex items-center justify-center px-6 py-10"
       onClick={() => {
         if (testStarted && !testEnded && !isPaused) {
           inputRef.current?.focus()
         }
       }}
     >
-      <div className="max-w-5xl w-full">
-        <div className="flex items-center justify-between mb-8">
+      <div className="max-w-7xl w-full">
+        <div className="flex items-center justify-between mb-6 pb-5 border-b-2 border-white">
           <h1 className="text-3xl font-bold flex items-center gap-2.5">
             <i className="fa-solid fa-keyboard text-blue-300"></i>
             Type<span className="text-blue-300">Fast</span>
@@ -322,7 +322,7 @@ function TypingTest() {
           </button>
         </div>
         
-        <div className="mb-13 flex justify-between items-center gap-6">
+        <div className="pb-5 border-b-2 border-white mb-6 flex justify-between items-center gap-6">
           <ContentSelector 
             activeSelector={activeSelector} 
             changeActiveSelector={changeActiveSelector}
@@ -373,6 +373,13 @@ function TypingTest() {
           testStarted={testStarted}
         />
 
+        <div
+          key={currentText}
+          className="animate-[typingAreaIn_0.35s_ease-out] pb-6 mb-6 border-b-2 border-white"
+        >
+          <TypingArea currentText={currentText} typedText={typedText} cursorStyle={cursorStyle}/>
+        </div>
+        
         <div className="flex justify-center mb-6">
           {!testStarted ? (
             <button
@@ -407,12 +414,6 @@ function TypingTest() {
           )}
         </div>
 
-        <div
-          key={currentText}
-          className="animate-[typingAreaIn_0.35s_ease-out]"
-        >
-          <TypingArea currentText={currentText} typedText={typedText} cursorStyle={cursorStyle}/>
-        </div>
 
         <input
           ref={inputRef}
