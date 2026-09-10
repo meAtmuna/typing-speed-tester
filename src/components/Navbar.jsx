@@ -32,13 +32,13 @@ function Navbar() {
             <div className="flex gap-3">
                 <Link
                     to="/login" 
-                    className="bg-blue-300 font font-semibold px-4 py-2 rounded-md text-primary-text hover:opacity-90 cursor-pointer transition-all"
+                    className="bg-blue-300 font font-semibold px-4 py-2 text-primary-text hover:opacity-90 cursor-pointer transition-all"
                 >
                     Login
                 </Link>
                 <Link 
                     to="/signup"
-                    className="bg-blue-300 font-semibold px-4 py-2 rounded-md hover:opacity-90 cursor-pointer transition-all"
+                    className="bg-blue-300 font-semibold px-4 py-2 hover:opacity-90 cursor-pointer transition-all"
                 >
                     Sign Up
                 </Link>

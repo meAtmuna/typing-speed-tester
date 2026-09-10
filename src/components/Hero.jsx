@@ -42,7 +42,7 @@ function Hero() {
         <section className="py-20">
             <div className="grid lg:grid-cols-2 items-center">
                 <div className="lg:pr-16">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-300 text-white mb-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 text-blue-300 mb-6">
                         <Zap size={14} />
                         <span className="text-white text-sm font-semibold uppercase tracking-wide">Improve Faster</span>
                     </div>
@@ -62,7 +62,7 @@ function Hero() {
                     <div className="flex gap-4 mt-10">
                         <Link 
                             to="/typing-test"
-                            className="bg-blue-300 text-app-bg px-8 py-4 rounded-xl font-semibold transition-all hover:-translate-y-1 duration-300 shadow-lg"
+                            className="bg-blue-300 text-app-bg px-8 py-4 rounded-md font-semibold transition-all hover:-translate-y-1 duration-300 shadow-lg"
                         >
                             Start Typing
                         </Link>
@@ -70,7 +70,7 @@ function Hero() {
                             href="https://github.com/meAtmuna/typing-speed-tester"
                             target="_blank"
                             rel="noopener noreferrer" 
-                            className="border border-border px-8 py-4 rounded-xl hover:border-blue-300 transition-all cursor-pointer flex items-center gap-2"
+                            className="border border-border px-8 py-4 rounded-md hover:border-blue-300 transition-all cursor-pointer flex items-center gap-2"
                         >
                             <i className="fa-brands fa-github"></i>
                             GitHub
@@ -79,7 +79,7 @@ function Hero() {
                 </div>
 
                 <div className="lg:pl-16 lg:border-l-2 lg:border-white">
-                    <div className="flex justify-between items-center mb-6">
+                    <div className="flex justify-between items-center border-b border-white py-5">
                         <p className="text-secondary-text uppercase tracking-widest text-xs">
                             Live Preview
                         </p>
@@ -90,7 +90,7 @@ function Hero() {
                             <div className="w-3 h-3 rounded-full bg-green-400"></div>
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-4 mb-10 mt-12">
+                    <div className="grid grid-cols-3 gap-4 mb-4 mt-3  border-b border-white py-5">
                         <div className="text-center">
                             <p className="text-wpm text-2xl font-bold font-mono">
                                 {previewWPM}
@@ -99,7 +99,7 @@ function Hero() {
                                 WPM
                             </p>
                         </div>
-                        <div className="text-center">
+                        <div className="text-center border-l border-white">
                             <p className="text-accuracy text-2xl font-bold font-mono">
                                 100%
                             </p>
@@ -107,7 +107,7 @@ function Hero() {
                                 Accuracy
                             </p>
                         </div>
-                        <div className="text-center">
+                        <div className="text-center border-l border-white">
                             <p className="text-cyan text-2xl font-bold font-mono">
                                 AI
                             </p>
@@ -116,7 +116,7 @@ function Hero() {
                             </p>
                         </div>
                     </div>
-                    <div className="p-6 text-xl leading-10 font-mono min-h-[130px]">
+                    <div className="p-6 text-xl leading-10 font-mono min-h-[130px]  border-b border-white">
                         {previewText.split("").map((char, index) => {
                             let className =  "text-white"
                             if (index < typedCount) {

@@ -1,4 +1,4 @@
-import { X, Volume2, VolumeX, Settings2, Eye, EyeOff, TextCursorIcon, RectangleHorizontal, Minus, GripVertical, Minimize2, MinusIcon, } from "lucide-react"
+import { X, Volume2, VolumeX, Settings2, Eye, EyeOff, TextCursorIcon, RectangleHorizontal, Minus, GripVertical, } from "lucide-react"
 import { Line } from "react-chartjs-2"
 
 function Settings({closeSettings, soundEnabled, changeSoundEnabled, hideTimer, changeHideTimer, cursorStyle, changeCursorStyle}) {

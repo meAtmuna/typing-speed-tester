@@ -383,7 +383,7 @@ function TypingTest() {
         <div className="flex justify-center mb-6">
           {!testStarted ? (
             <button
-              className="px-8 py-3 bg-blue-300 text-app-bg font-semibold rounded-xl cursor-pointer transition-all duration-200 ease-out hover:scale-105 active:scale-95" 
+              className="px-8 py-3 bg-blue-300 text-app-bg font-semibold rounded-md cursor-pointer transition-all duration-200 ease-out hover:scale-105 active:scale-95" 
               onClick={() => {
                 setTestStarted(true)
                 setIsPaused(false)
@@ -394,7 +394,7 @@ function TypingTest() {
             </button>
           ) : (
             <button 
-              className={`px-8 py-3 font-semibold rounded-xl cursor-pointer transition-all duration-200 ease-out hover:scale-105 active:scale-95 ${ 
+              className={`px-8 py-3 font-semibold rounded-md cursor-pointer transition-all duration-200 ease-out hover:scale-105 active:scale-95 ${ 
                 isPaused
                   ? "bg-blue-700 text-app-bg"
                   : "bg-blue-300 text-app-bg"
@@ -427,7 +427,7 @@ function TypingTest() {
 
       {showCustomModal && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="bg-card rounded-xl p-6 w-[420px]">
+          <div className="bg-black border border-white p-6 w-[420px]">
             <h2 className="text-xl font-bold mb-2">Custom Word Count</h2>
             <p className="text-secondary-text mb-4">
               Enter number of words
@@ -444,7 +444,7 @@ function TypingTest() {
                     setCustomWords(value)
                   }
                 }}
-                className={`w-full px-4 py-3 rounded-lg outline-none border mb-4 ${
+                className={`w-full px-4 py-3 outline-none border mb-4 ${
                   customWords.trim() === ""
                     ? "border-red-500 bg-typing-box" 
                     : "border-border bg-typing-box focus:border-blue-300" 
@@ -453,14 +453,14 @@ function TypingTest() {
 
               <div className="flex gap-3 justify-end"> 
                 <button 
-                  className="px-4 py-2 rounded-lg text-secondary-text border border-blue-300 cursor-pointer"
+                  className="px-4 py-2 text-secondary-text border border-blue-300 cursor-pointer"
                   onClick={() => setShowCustomModal(false)}
                 >
                   Cancel
                 </button>
 
                 <button
-                  className="px-4 py-2 rounded-lg bg-blue-300 text-app-bg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-blue-300 text-app-bg font-semibold cursor-pointer"
                   onClick={() => {
                     applyCustomWords()
                     setShowCustomModal(false)
@@ -475,7 +475,7 @@ function TypingTest() {
 
       {showCustomTimeModal &&  (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="bg-card rounded-xl p-6 w-[420px]">
+          <div className="bg-black border border-white p-6 w-[420px]">
             <h2 className="text-xl font-bold mb-2">Custom Time</h2>
             <p className="text-secondary-text mb-4">
               Enter time in seconds
@@ -492,7 +492,7 @@ function TypingTest() {
                     setCustomTime(value)
                   }
                 }}
-                className={`w-full px-4 py-3 rounded-lg outline-none border mb-4 ${
+                className={`w-full px-4 py-3 outline-none border mb-4 ${
                   customTime.trim() === ""
                     ? "border-red-500 bg-typing-box" 
                     : "border-border bg-typing-box focus:border-blue-300" 
@@ -501,14 +501,14 @@ function TypingTest() {
 
               <div className="flex gap-3 justify-end"> 
                 <button 
-                  className="px-4 py-2 rounded-lg text-secondary-text border border-blue-300 cursor-pointer"
+                  className="px-4 py-2 text-secondary-text border border-blue-300 cursor-pointer"
                   onClick={() => setShowCustomTimeModal(false)}
                 >
                   Cancel
                 </button>
 
                 <button
-                  className="px-4 py-2 rounded-lg bg-blue-300 text-app-bg font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-blue-300 text-app-bg font-semibold cursor-pointer"
                   onClick={() => {
                     applyCustomTime()
                     setShowCustomTimeModal(false)
@@ -524,7 +524,7 @@ function TypingTest() {
 
       {showAiModal && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="bg-card rounded-xl p-6 w[420px]">
+          <div className="bg-black border border-white p-6 w-[420px]">
             <h2 className="text-xl font-bold mb-2">AI Story</h2>
             <p className="text-secondary-text mb-5">
               Select a Story type
@@ -535,7 +535,7 @@ function TypingTest() {
                 <button 
                   key={type}
                   onClick={() => setSelectedAiStoryType(type)}
-                  className={`py-2  rounded-lg capitalize border transition-all px-4 cursor-pointer ${
+                  className={`py-2 capitalize border transition-all px-4 cursor-pointer ${
                     selectedAiStoryType === type
                       ? "bg-blue-300 text-white"
                       : "text-secondary-text hover:text-white hover:bg-blue-300"
@@ -548,13 +548,13 @@ function TypingTest() {
 
             <div className="flex justify-end gap-3">
               <button 
-                className="px-4 py-2 rounded-lg text-secondary-text border border-blue-300 cursor-pointer"
+                className="px-4 py-2 text-secondary-text border border-blue-300 cursor-pointer"
                 onClick={() => setShowAiModal(false)}
               >
                 Cancel
               </button>
               <button
-                className="px-4 py-2 rounded-lg bg-blue-300 text-app-bg font-semibold disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 bg-blue-300 text-app-bg font-semibold disabled:opacity-50 cursor-pointer"
                 onClick={generateAiStory}
                 disabled={loadingStory}
               >
