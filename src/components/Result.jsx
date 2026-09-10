@@ -40,45 +40,47 @@ function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLimit}
       }
     }
     return(
-        <div className="h-screen bg-card flex items-center justify-center px-6 py-4 overflow-hidden">
-          <div className="bg-app-bg p-7 rounded-3xl w-full max-w-4xl">
+        <div className="min-h-screen bg-black text-primary-text px-8 py-10 overflow-y-auto">
+          <div className="w-full max-w-7xl mx-auto">
 
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-0.5 px-4 py-1 rounded-full bg-blue-300 text-white text-sm mb-4">
+            <div className="text-center pb-7 border-b-2 border-white">
+              <div className="inline-flex items-center gap-2 text-blue-300 text-sm mb-4 font-medium">
                 <Activity size={14} />
                 <span>Test Complete</span>
               </div>
 
-              <h1 className="text-6xl font-bold text-blue-300 mb-2">{wpm}</h1>
+              <h1 className="text-5xl font-bold text-blue-300 mb-2">{wpm}</h1>
 
               <p className="text-muted-text tracking-[0.2em] uppercase">Words Per Minute</p>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 mb-6">
-              <div className="p-5 text-center">
+            <div className="grid grid-cols-3 border-b-2 border-white">
+              <div className="p-6 px-4 text-center">
                 <p className="text-accuracy text-4xl font-bold">{accuracy}%</p>
                 <p className="text-muted-text uppercase text-sm mt-1">Accuracy</p>
               </div>
 
-              <div className="p-5 text-center">
+              <div className="p-6 px-4 text-center relative">
+                <div className="absolute left-0 top-5 bottom-5 border-l border-white"></div>
+                <div className="absolute right-0 top-5 bottom-5 border-r border-white"></div>
                 <p className="text-mistake text-4xl font-bold">{mistakes}</p>
                 <p className="text-muted-text uppercase text-sm mt-1">Mistakes</p>
               </div>
 
-              <div className="p-5 text-center">
+              <div className="p-6 px-4 text-center">
                 <p className="text-time text-4xl font-bold">{timeLimit}s</p>
                 <p className="text-muted-text uppercase text-sm mt-1">Time</p>
               </div>
             </div>
 
-            <div className="mb-5 bg-typing rounded-2xl p-4">
+            <div className="mb-5 border-b-2 border-white py-6">
               <p className="text-muted-text uppercase text-sm mb-4">WPM Over Time</p>
               <ResultChart wpmHistory={wpmHistory} />
             </div>
             
-            <div className="flex gap-4">
+            <div className="flex gap-3 pt-2">
               <button
-                className="flex-1 py-3 rounded-xl border border-border hover:border-white text-primary-text transition-all cursor-pointer flex items-center justify-center gap-2 hover:scale-[1.02]"
+                className="flex-1 py-3 rounded-md border border-border hover:bg-secondary-text/10 text-primary-text transition-colors cursor-pointer flex items-center justify-center gap-2"
                 onClick={resetTest}
               >
                 <RotateCcw size={18}/>
@@ -86,7 +88,7 @@ function ResultModal({wpm, accuracy, mistakes, resetTest, wpmHistory, timeLimit}
               </button>
 
               <button
-                className="px-8 py-3 rounded-xl border border-border hover:border-white text-primary-text transition-all cursor-pointer flex items-center justify-center gap-2 min-w-[130px]"
+                className="px-8 py-3 rounded-md border border-border hover:bg-secondary-text/10 text-primary-text transition-colors cursor-pointer flex items-center justify-center gap-2 min-w-[130px]"
                 onClick={shareResult}
               >
                 {shareStatus ? (
